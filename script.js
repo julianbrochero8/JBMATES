@@ -3,7 +3,7 @@ const menuButton = document.querySelector(".menu-toggle");
 const nav = document.querySelector(".nav");
 const year = document.querySelector("#year");
 
-// Actualizar el año automáticamente
+// Año del pie de página
 if (year) {
   year.textContent = new Date().getFullYear();
 }
@@ -11,88 +11,56 @@ if (year) {
 // Menú para celulares
 if (menuButton && nav) {
   menuButton.addEventListener("click", () => {
-    const isOpen =
-      menuButton.getAttribute("aria-expanded") === "true";
+    const open = menuButton.getAttribute("aria-expanded") === "true";
 
-    menuButton.setAttribute("aria-expanded", String(!isOpen));
-    menuButton.setAttribute(
-      "aria-label",
-      isOpen ? "Abrir menú" : "Cerrar menú"
-    );
-
-    nav.classList.toggle("open", !isOpen);
+    menuButton.setAttribute("aria-expanded", String(!open));
+    menuButton.setAttribute("aria-label", open ? "Abrir menú" : "Cerrar menú");
+    nav.classList.toggle("open", !open);
   });
 
-  nav.querySelectorAll("a").forEach((link) => {
+  nav.querySelectorAll("a").forEach(link => {
     link.addEventListener("click", () => {
       nav.classList.remove("open");
       menuButton.setAttribute("aria-expanded", "false");
       menuButton.setAttribute("aria-label", "Abrir menú");
     });
   });
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      nav.classList.remove("open");
-      menuButton.setAttribute("aria-expanded", "false");
-      menuButton.setAttribute("aria-label", "Abrir menú");
-    }
-  });
 }
 
-// EFECTO PARALLAX
+// PARALLAX DEL FONDO PRINCIPAL
 const hero = document.querySelector(".hero");
 const heroBg = document.querySelector(".hero-bg");
-const reduceMotion = window.matchMedia(
-  "(prefers-reduced-motion: reduce)"
-);
 
-let animationPending = false;
+let frameRequested = false;
 
-function updateParallax() {
-  animationPending = false;
+function parallax() {
+  frameRequested = false;
 
-  if (!hero || !heroBg || reduceMotion.matches) {
-    if (heroBg) {
-      heroBg.style.setProperty("--parallax-y", "0px");
-    }
+  if (!hero || !heroBg) return;
+
+  // Respeta la preferencia de movimiento reducido
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    heroBg.style.setProperty("--parallax-y", "0px");
     return;
   }
 
   const rect = hero.getBoundingClientRect();
 
-  // No calcular cuando el encabezado está fuera de pantalla
-  if (rect.bottom < 0 || rect.top > window.innerHeight) {
-    return;
-  }
+  // Mueve el fondo según el desplazamiento de la página
+  const speed = window.innerWidth <= 700 ? 0.32 : 0.55;
+  const movement = Math.max(-100, Math.min(220, -rect.top * speed));
 
-  // Movimiento más visible en computadora y celular
-  const speed = window.innerWidth <= 700 ? 0.22 : 0.40;
-
-  // Movimiento relativo a la posición del encabezado
-  const offset = Math.max(
-    -100,
-    Math.min(180, -rect.top * speed)
-  );
-
-  heroBg.style.setProperty("--parallax-y", `${offset}px`);
+  heroBg.style.setProperty("--parallax-y", movement + "px");
 }
 
-function requestParallaxUpdate() {
-  if (!animationPending) {
-    animationPending = true;
-    window.requestAnimationFrame(updateParallax);
+function requestParallax() {
+  if (!frameRequested) {
+    frameRequested = true;
+    requestAnimationFrame(parallax);
   }
 }
 
-window.addEventListener("scroll", requestParallaxUpdate, {
-  passive: true
-});
+window.addEventListener("scroll", requestParallax, { passive: true });
+window.addEventListener("resize", requestParallax);
 
-window.addEventListener("resize", requestParallaxUpdate);
-
-if (reduceMotion.addEventListener) {
-  reduceMotion.addEventListener("change", requestParallaxUpdate);
-}
-
-updateParallax();
+parallax();
