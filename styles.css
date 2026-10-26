@@ -122,20 +122,17 @@ nav a:hover {
 
 .hero-bg {
   position: absolute;
-  inset: -15% -5%;
+  inset: 0;
   z-index: 1;
   background-image: url('hero-bg.jpg');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
   
-  /* Trucos de optimización y nitidez 4K */
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  transform: translateZ(0);
-  will-change: transform;
+  /* Trucos de nitidez y renderizado 4K */
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
+  transform: translateZ(0);
 }
 
 .hero-overlay {
