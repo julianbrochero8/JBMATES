@@ -135,8 +135,6 @@ nav a:hover {
   height: 100%;
   object-fit: cover;
   object-position: center right;
-  
-  /* Ajuste de hardware para nitidez sin pixelado */
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
   transform: translateZ(0);
@@ -439,7 +437,7 @@ blockquote {
   margin-top: 20px;
 }
 
-/* CONTACTO */
+/* CONTACTO & BOTONES DE ACCIÓN */
 .contact-section {
   padding: 80px 8%;
   background: var(--bg-card);
@@ -447,29 +445,85 @@ blockquote {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 40px;
 }
 
-.contact-section h2 {
+.contact-info h2 {
   font-family: var(--font-serif);
   font-size: 2.2rem;
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-.btn-whatsapp {
-  background: #25d366;
-  color: #fff;
-  font-weight: 600;
-  padding: 16px 32px;
-  border-radius: 30px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.contact-info p {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.contact-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Estilo base botones sociales */
+.btn-social {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  padding: 16px 28px;
+  border-radius: 40px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  color: #ffffff;
+}
+
+.btn-social svg {
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.btn-social .arrow {
+  font-size: 1.1rem;
+  transition: transform 0.3s ease;
+}
+
+.btn-social:hover {
+  transform: translateY(-4px) scale(1.03);
+}
+
+.btn-social:hover svg {
+  transform: rotate(-8deg) scale(1.1);
+}
+
+.btn-social:hover .arrow {
+  transform: translate(3px, -3px);
+}
+
+/* Botón INSTAGRAM (Degradado llamativo) */
+.btn-instagram {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  box-shadow: 0 4px 15px rgba(220, 39, 67, 0.3);
+}
+
+.btn-instagram:hover {
+  box-shadow: 0 8px 25px rgba(220, 39, 67, 0.55);
+}
+
+/* Botón WHATSAPP (Verde vibrante) */
+.btn-whatsapp {
+  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
 }
 
 .btn-whatsapp:hover {
-  transform: scale(1.05);
-  box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.55);
 }
 
 /* FOOTER */
@@ -492,6 +546,8 @@ footer small {
 @media (max-width: 768px) {
   nav { display: none; }
   .about-section { grid-template-columns: 1fr; }
-  .contact-section { flex-direction: column; gap: 30px; text-align: center; }
+  .contact-section { flex-direction: column; text-align: center; }
+  .contact-actions { justify-content: center; width: 100%; }
+  .btn-social { width: 100%; justify-content: center; }
   .section-header { flex-direction: column; align-items: flex-start; gap: 10px; }
 }
