@@ -1,4 +1,96 @@
-<!-- Sección Tienda -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JB MATES | Tradición en cada mate</title>
+  
+  <!-- Fuentes Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Estilos CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Encabezado / Navegación -->
+  <header>
+    <a href="#inicio" class="logo" aria-label="JB MATES, inicio">
+      <span class="badge">JB</span>
+      <span class="brand-info">
+        <strong>JB MATES</strong>
+        <small>TRADICIÓN EN CADA MATE</small>
+      </span>
+    </a>
+    
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#tienda">Tienda</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    
+    <a href="#tienda" class="btn-header">Explorar tienda <span>↗</span></a>
+  </header>
+
+  <main>
+    <!-- Seccion Hero con Imagen HD Nativa -->
+    <section id="inicio" class="hero">
+      <div class="hero-bg-wrapper">
+        <img src="hero-bg.jpg" alt="JB Mates artesanal" class="hero-img-hd" decoding="async">
+      </div>
+      <div class="hero-overlay" aria-hidden="true"></div>
+      
+      <div class="hero-content">
+        <p class="tagline"><span></span> MATES ARTESANALES</p>
+        <h1>Tradición, calidad<br>y estilo en cada mate.</h1>
+        <p class="description">Piezas con carácter, inspiradas en nuestras raíces y hechas para acompañar tus mejores momentos.</p>
+        <div class="hero-buttons">
+          <a href="#tienda" class="btn-primary">Descubrir productos <span>→</span></a>
+        </div>
+        <p class="sub-quote">Una pausa. Una tradición. Un mate.</p>
+      </div>
+
+      <a href="#tienda" class="scroll-indicator">
+        <span></span> Deslizá para descubrir
+      </a>
+    </section>
+
+    <!-- Beneficios -->
+    <section class="benefits" aria-label="Beneficios">
+      <article>
+        <b>✳</b>
+        <div>
+          <strong>Calidad artesanal</strong>
+          <small>Detalles que hacen la diferencia</small>
+        </div>
+      </article>
+      <article>
+        <b>↗</b>
+        <div>
+          <strong>Envíos a coordinar</strong>
+          <small>Consultá opciones disponibles</small>
+        </div>
+      </article>
+      <article>
+        <b>◇</b>
+        <div>
+          <strong>Atención personalizada</strong>
+          <small>Te ayudamos a elegir</small>
+        </div>
+      </article>
+      <article>
+        <b>◉</b>
+        <div>
+          <strong>Compra acompañada</strong>
+          <small>Consultas directas</small>
+        </div>
+      </article>
+    </section>
+
+    <!-- Sección Tienda (8 Productos) -->
     <section id="tienda" class="products-section">
       <div class="section-header">
         <div>
@@ -10,7 +102,7 @@
 
       <div class="product-grid">
 
-        <!-- 1. SET COMPLETO -->
+        <!-- 1. SET COMPLETO IMPERIAL -->
         <article class="card">
           <a href="#contacto">
             <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=900&q=85" alt="Set Imperial Completo" loading="lazy">
@@ -23,7 +115,7 @@
           </div>
         </article>
 
-        <!-- 2. SET COMPLETO -->
+        <!-- 2. SET COMPLETO CAMIONERO -->
         <article class="card">
           <a href="#contacto">
             <img src="https://images.unsplash.com/photo-1513558161293-cdod1e6b0c5b?auto=format&fit=crop&w=900&q=85" alt="Set Camionero Completo" loading="lazy">
@@ -36,7 +128,7 @@
           </div>
         </article>
 
-        <!-- 3. MATE INDIVIDUAL -->
+        <!-- 3. MATE IMPERIAL -->
         <article class="card">
           <a href="#contacto">
             <img src="https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=900&q=85" alt="Mate Imperial" loading="lazy">
@@ -49,7 +141,7 @@
           </div>
         </article>
 
-        <!-- 4. MATE INDIVIDUAL -->
+        <!-- 4. MATE CAMIONERO -->
         <article class="card">
           <a href="#contacto">
             <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=900&q=85" alt="Mate Camionero" loading="lazy">
@@ -62,7 +154,7 @@
           </div>
         </article>
 
-        <!-- 5. MATE INDIVIDUAL -->
+        <!-- 5. MATE TORPEDO -->
         <article class="card">
           <a href="#contacto">
             <img src="https://images.unsplash.com/photo-1513558161293-cdod1e6b0c5b?auto=format&fit=crop&w=900&q=85" alt="Mate Torpedo" loading="lazy">
@@ -75,7 +167,7 @@
           </div>
         </article>
 
-        <!-- 6. MATE INDIVIDUAL -->
+        <!-- 6. MATE CAMPISTA -->
         <article class="card">
           <a href="#contacto">
             <img src="https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=900&q=85" alt="Mate de Madera" loading="lazy">
@@ -88,7 +180,7 @@
           </div>
         </article>
 
-        <!-- 7. MATE INDIVIDUAL -->
+        <!-- 7. MATE URUGUAYO -->
         <article class="card">
           <a href="#contacto">
             <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=900&q=85" alt="Mate Uruguayo" loading="lazy">
@@ -101,7 +193,7 @@
           </div>
         </article>
 
-        <!-- 8. MATE INDIVIDUAL -->
+        <!-- 8. MATE PAMPA -->
         <article class="card">
           <a href="#contacto">
             <img src="https://images.unsplash.com/photo-1513558161293-cdod1e6b0c5b?auto=format&fit=crop&w=900&q=85" alt="Mate Pampa" loading="lazy">
@@ -117,3 +209,57 @@
       </div>
       <p class="disclaimer">Las imágenes y los nombres son ilustrativos. Se reemplazarán por tus productos reales.</p>
     </section>
+
+    <!-- Sección Nosotros -->
+    <section id="nosotros" class="about-section">
+      <div class="about-content">
+        <p class="tagline"><span></span> SOBRE JB MATES</p>
+        <h2>Más que un mate.<br>Una forma de compartir.</h2>
+        <p>Creemos en esos momentos simples que nos conectan: una charla, una ronda y el ritual de preparar un buen mate. JB MATES celebra esa tradición con piezas elegidas con cuidado y personalidad.</p>
+        <a href="#contacto" class="btn-primary">Conocé nuestra propuesta <span>→</span></a>
+      </div>
+      <div class="about-stamp">
+        HECHO CON<br><strong>IDENTIDAD</strong><br>ARGENTINA
+      </div>
+    </section>
+
+    <!-- Cita / Banner -->
+    <section class="quote-section">
+      <p class="tagline"><span></span> EL RITUAL NOS UNE</p>
+      <blockquote>“Hay cosas que no necesitan explicación.<br>Solo agua caliente y alguien con quien compartir.”</blockquote>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="contact-section">
+      <div>
+        <p class="tagline"><span></span> HABLEMOS</p>
+        <h2>Tu próximo mate<br>empieza acá.</h2>
+        <p>Escribinos para consultar modelos, disponibilidad y opciones de entrega.</p>
+      </div>
+      <a href="https://wa.me/5490000000000" target="_blank" rel="noopener" class="btn-whatsapp">Consultar por WhatsApp <span>↗</span></a>
+    </section>
+  </main>
+
+  <!-- Pie de página -->
+  <footer>
+    <a href="#inicio" class="logo">
+      <span class="badge">JB</span>
+      <span class="brand-info">
+        <strong>JB MATES</strong>
+        <small>TRADICIÓN EN CADA MATE</small>
+      </span>
+    </a>
+    <p>Tradición que se comparte.</p>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#tienda">Tienda</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <small>© JB MATES. Todos los derechos reservados.</small>
+  </footer>
+
+  <!-- JS -->
+  <script src="script.js"></script>
+</body>
+</html>
