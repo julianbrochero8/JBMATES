@@ -109,7 +109,7 @@ nav a:hover {
   color: #151411;
 }
 
-/* SECCIÓN HERO / PARALLAX */
+/* SECCIÓN HERO / PARALLAX EN MÁXIMA CALIDAD */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -117,17 +117,25 @@ nav a:hover {
   align-items: center;
   padding: 0 8%;
   overflow: hidden;
+  background-color: var(--bg);
 }
 
 .hero-bg {
   position: absolute;
-  inset: -20% -5%;
+  inset: -15% -5%;
   z-index: 1;
   background-image: url('hero-bg.jpg');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+  
+  /* Trucos de optimización y nitidez 4K */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
   will-change: transform;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 
 .hero-overlay {
@@ -136,9 +144,9 @@ nav a:hover {
   z-index: 2;
   background: linear-gradient(
     90deg,
-    rgba(21, 20, 17, 0.85) 0%,
-    rgba(21, 20, 17, 0.5) 45%,
-    rgba(21, 20, 17, 0.2) 100%
+    rgba(21, 20, 17, 0.88) 0%,
+    rgba(21, 20, 17, 0.55) 45%,
+    rgba(21, 20, 17, 0.25) 100%
   );
   pointer-events: none;
 }
@@ -230,7 +238,8 @@ nav a:hover {
   gap: 1.5rem;
   padding: 40px 8%;
   background: var(--bg-card);
-  border-y: 1px solid var(--border);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
 .benefits article {
@@ -287,6 +296,7 @@ nav a:hover {
   border-radius: 12px;
   overflow: hidden;
   transition: transform 0.3s ease;
+  position: relative;
 }
 
 .card:hover {
