@@ -129,9 +129,10 @@ nav a:hover {
   background-position: center center;
   background-repeat: no-repeat;
   
-  /* Trucos de nitidez y renderizado 4K */
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
+  /* Trucos avanzados de nitidez y filtrado para evitar pixelación */
+  filter: contrast(1.03) saturate(1.05);
+  -webkit-font-smoothing: antialiased;
+  image-rendering: high-quality;
   transform: translateZ(0);
 }
 
