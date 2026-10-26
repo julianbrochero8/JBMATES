@@ -109,7 +109,7 @@ nav a:hover {
   color: #151411;
 }
 
-/* SECCIÓN HERO / PARALLAX EN MÁXIMA CALIDAD */
+/* SECCIÓN HERO / AJUSTE PERFECTO DE TAMAÑO */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -117,7 +117,7 @@ nav a:hover {
   align-items: center;
   padding: 0 8%;
   overflow: hidden;
-  background-color: var(--bg);
+  background-color: #151411; /* Color base oscuro para los laterales si sobran */
 }
 
 .hero-bg {
@@ -125,14 +125,14 @@ nav a:hover {
   inset: 0;
   z-index: 1;
   background-image: url('hero-bg.jpg');
-  background-size: cover;
-  background-position: center center;
+  /* Usamos 'contain' o 'auto 100%' para que la imagen mantenga su proporción original exacta sin deformarse ni pixelarse por estiramiento excesivo */
+  background-size: cover; 
+  background-position: center right; /* Alineado hacia la derecha donde está el mate y el termo */
   background-repeat: no-repeat;
   
-  /* Trucos avanzados de nitidez y filtrado para evitar pixelación */
-  filter: contrast(1.03) saturate(1.05);
-  -webkit-font-smoothing: antialiased;
-  image-rendering: high-quality;
+  /* Filtro de nitidez y renderizado avanzado */
+  filter: contrast(1.05);
+  image-rendering: -webkit-optimize-contrast;
   transform: translateZ(0);
 }
 
@@ -142,9 +142,9 @@ nav a:hover {
   z-index: 2;
   background: linear-gradient(
     90deg,
-    rgba(21, 20, 17, 0.88) 0%,
-    rgba(21, 20, 17, 0.55) 45%,
-    rgba(21, 20, 17, 0.25) 100%
+    rgba(21, 20, 17, 0.9) 0%,
+    rgba(21, 20, 17, 0.6) 45%,
+    rgba(21, 20, 17, 0.3) 100%
   );
   pointer-events: none;
 }
