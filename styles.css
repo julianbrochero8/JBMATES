@@ -437,15 +437,15 @@ blockquote {
   margin-top: 20px;
 }
 
-/* CONTACTO & BOTONES DE ACCIÓN */
+/* CONTACTO CON TARJETAS ELEGANTES */
 .contact-section {
   padding: 80px 8%;
   background: var(--bg-card);
   border-top: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
   gap: 40px;
+  align-items: center;
 }
 
 .contact-info h2 {
@@ -460,70 +460,98 @@ blockquote {
   font-size: 1rem;
 }
 
-.contact-actions {
+.contact-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Tarjeta base */
+.contact-card {
   display: flex;
   align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-/* Estilo base botones sociales */
-.btn-social {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 16px 28px;
-  border-radius: 40px;
-  font-weight: 700;
-  font-size: 0.95rem;
-  letter-spacing: 0.5px;
+  gap: 18px;
+  padding: 20px 24px;
+  border-radius: 16px;
+  background-color: #171513;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   text-decoration: none;
-  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  position: relative;
-  overflow: hidden;
-  color: #ffffff;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.btn-social svg {
+.contact-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.contact-card.card-wsp:hover {
+  border-color: rgba(37, 211, 102, 0.4);
+}
+
+.contact-card.card-ig:hover {
+  border-color: rgba(214, 164, 109, 0.4);
+}
+
+/* Icono Contenedor */
+.card-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon-wsp {
+  background-color: rgba(37, 211, 102, 0.15);
+  color: #25d366;
+}
+
+.icon-ig {
+  background-color: rgba(214, 164, 109, 0.12);
+  color: var(--gold);
+}
+
+/* Texto */
+.card-content {
+  flex-grow: 1;
+}
+
+.card-content h3 {
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  font-family: var(--font-sans);
+}
+
+.card-content p {
+  color: #a39b8e;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Flecha Acción */
+.card-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
   transition: transform 0.3s ease;
 }
 
-.btn-social .arrow {
-  font-size: 1.1rem;
-  transition: transform 0.3s ease;
+.arrow-wsp {
+  color: #00e676;
 }
 
-.btn-social:hover {
-  transform: translateY(-4px) scale(1.03);
+.arrow-ig {
+  color: var(--gold);
 }
 
-.btn-social:hover svg {
-  transform: rotate(-8deg) scale(1.1);
-}
-
-.btn-social:hover .arrow {
-  transform: translate(3px, -3px);
-}
-
-/* Botón INSTAGRAM (Degradado llamativo) */
-.btn-instagram {
-  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-  box-shadow: 0 4px 15px rgba(220, 39, 67, 0.3);
-}
-
-.btn-instagram:hover {
-  box-shadow: 0 8px 25px rgba(220, 39, 67, 0.55);
-}
-
-/* Botón WHATSAPP (Verde vibrante) */
-.btn-whatsapp {
-  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
-  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-}
-
-.btn-whatsapp:hover {
-  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.55);
+.contact-card:hover .card-arrow {
+  transform: translateX(4px);
 }
 
 /* FOOTER */
@@ -546,8 +574,28 @@ footer small {
 @media (max-width: 768px) {
   nav { display: none; }
   .about-section { grid-template-columns: 1fr; }
-  .contact-section { flex-direction: column; text-align: center; }
-  .contact-actions { justify-content: center; width: 100%; }
-  .btn-social { width: 100%; justify-content: center; }
-  .section-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .contact-section { 
+    grid-template-columns: 1fr; 
+    text-align: left; 
+    gap: 30px; 
+  }
+  .contact-card {
+    padding: 16px 18px;
+    gap: 14px;
+  }
+  .card-icon {
+    width: 44px;
+    height: 44px;
+  }
+  .card-content h3 {
+    font-size: 0.98rem;
+  }
+  .card-content p {
+    font-size: 0.82rem;
+  }
+  .section-header { 
+    flex-direction: column; 
+    align-items: flex-start; 
+    gap: 10px; 
+  }
 }
