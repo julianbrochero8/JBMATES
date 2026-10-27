@@ -218,6 +218,77 @@
       <p class="disclaimer">Las imágenes y los nombres son ilustrativos. Se reemplazarán por tus productos reales.</p>
     </section>
 
+    <!-- NUEVA SECCIÓN: MÚSICA & MATE (BANDA SONORA MATERA) -->
+    <section class="music-section">
+      <div class="music-container">
+        <div class="music-header">
+          <p class="tagline">🎵 BANDA SONORA MATERA</p>
+          <h2>Música & Mate: Dejá tu canción para la ronda</h2>
+          <p class="music-desc">Cada mate tiene su melodía. Cuando te llevás tu pieza, recomendá ese tema que no puede faltar en tus cebadas y sumalo a la playlist comunitaria.</p>
+        </div>
+
+        <!-- Formulario para enviar tema por WhatsApp -->
+        <div class="music-form-box">
+          <div class="input-group">
+            <label>CANCIÓN Y ARTISTA</label>
+            <input type="text" id="inputCancion" placeholder="Ej: Zamba de mi esperanza - Jorge Cafrune">
+          </div>
+          <div class="input-group">
+            <label>TU NOMBRE Y MATE ELEGIDO</label>
+            <input type="text" id="inputNombre" placeholder="Ej: Valentín (Mate Imperial Algarrobo)">
+          </div>
+          <button type="button" class="btn-sumar-musica" onclick="enviarCancionWsp()">
+            🎵 Sumar a la Playlist Matera
+          </button>
+        </div>
+
+        <!-- Lista de Temas en la Ronda -->
+        <div class="music-list-wrapper">
+          <div class="music-list-header">
+            <span>TEMAS EN LA RONDA MATERA</span>
+            <a href="https://spotify.com" target="_blank" rel="noopener" class="spotify-link-top">Spotify ↗</a>
+          </div>
+
+          <div class="playlist-items">
+            <!-- Item 1 -->
+            <div class="playlist-card">
+              <div class="play-icon">▶</div>
+              <div class="song-info">
+                <h4>Puente — Gustavo Cerati</h4>
+                <p>Facundo (Mate Imperial Cincelado)</p>
+              </div>
+              <div class="heart-icon">♡</div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="playlist-card">
+              <div class="play-icon">▶</div>
+              <div class="song-info">
+                <h4>Zamba de mi Esperanza — Cafrune</h4>
+                <p>Martín (Camionero Cuero Crudo)</p>
+              </div>
+              <div class="heart-icon">♡</div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="playlist-card">
+              <div class="play-icon">▶</div>
+              <div class="song-info">
+                <h4>Ji Ji Ji — Patricio Rey</h4>
+                <p>Sofía (Torpedo Alpaca)</p>
+              </div>
+              <div class="heart-icon">♡</div>
+            </div>
+          </div>
+
+          <!-- Botón inferior para escuchar Playlist -->
+          <a href="https://spotify.com" target="_blank" rel="noopener" class="btn-spotify-bottom">
+            🎧 Escuchar Playlist JB MATES en Spotify ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- Sección Nosotros (Con tu Logo Oficial logo.jpg) -->
     <section id="nosotros" class="about-section">
       <div class="about-content">
@@ -309,7 +380,23 @@
     <small>© JB MATES. Todos los derechos reservados.</small>
   </footer>
 
-  <!-- JS -->
-  <script src="script.js"></script>
+  <!-- Script interactivo para enviar la canción por WhatsApp -->
+  <script>
+    function enviarCancionWsp() {
+      const cancion = document.getElementById('inputCancion').value.trim();
+      const nombre = document.getElementById('inputNombre').value.trim();
+
+      if (!cancion || !nombre) {
+        alert("Por favor completa ambos campos para sumar tu tema a la ronda.");
+        return;
+      }
+
+      const texto = `Hola! Quiero sumar esta canción a la Playlist Matera de JB MATES:\n🎵 Tema: ${cancion}\n👤 De: ${nombre}`;
+      const numeroWsp = "5490000000000"; // Reemplazá con tu número de WhatsApp
+      const url = `https://wa.me/${numeroWsp}?text=${encodeURIComponent(texto)}`;
+      
+      window.open(url, '_blank');
+    }
+  </script>
 </body>
 </html>
