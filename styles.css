@@ -395,7 +395,7 @@ nav a:hover {
   flex-grow: 1;
 }
 
-/* BOTONES DE ACCIÓN DE PRODUCTO (NUEVO ESTILO DE IMAGEN) */
+/* BOTONES DE ACCIÓN DE PRODUCTO */
 .product-actions {
   display: flex;
   align-items: center;
@@ -405,7 +405,6 @@ nav a:hover {
 
 .btn-ver-pieza {
   flex-grow: 1;
-  background: #8b4513; /* Tono marrón artesanal */
   background: linear-gradient(135deg, #a0522d 0%, #6e330c 100%);
   color: #ffffff;
   border: none;
@@ -431,7 +430,6 @@ nav a:hover {
 .btn-wsp-square {
   width: 46px;
   height: 46px;
-  background: #235338; /* Tono verde oscuro elegante */
   background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
   color: #ffffff;
   border-radius: 10px;
@@ -457,11 +455,11 @@ nav a:hover {
   font-style: italic;
 }
 
-/* MODAL DE VIDEO */
+/* MODAL DE VIDEO OPTIMIZADO PARA MÓVILES */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.88);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   z-index: 1000;
@@ -471,7 +469,7 @@ nav a:hover {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
-  padding: 20px;
+  padding: 16px;
 }
 
 .modal-overlay.active {
@@ -484,10 +482,10 @@ nav a:hover {
   border: 1px solid var(--border);
   border-radius: 20px;
   width: 100%;
-  max-width: 500px;
-  padding: 25px;
+  max-width: 480px;
+  padding: 24px;
   position: relative;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
   transform: translateY(20px);
   transition: transform 0.3s ease;
 }
@@ -504,14 +502,15 @@ nav a:hover {
   border: none;
   color: var(--text);
   font-size: 1.2rem;
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: background 0.3s ease;
+  z-index: 10;
 }
 
 .modal-close:hover {
@@ -520,24 +519,30 @@ nav a:hover {
 
 .modal-content h3 {
   font-family: var(--font-serif);
-  font-size: 1.5rem;
-  margin-bottom: 15px;
+  font-size: 1.4rem;
+  margin-bottom: 14px;
   color: var(--text);
+  padding-right: 35px;
 }
 
 .video-container {
   width: 100%;
+  min-height: 250px;
   border-radius: 12px;
   overflow: hidden;
-  background: #000;
+  background: #0b0a09;
   margin-bottom: 20px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .video-container video {
   width: 100%;
-  max-height: 60vh;
+  max-height: 55vh;
   display: block;
+  object-fit: contain;
 }
 
 .modal-wsp-link {
