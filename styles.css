@@ -22,18 +22,19 @@ html {
   font-family: var(--font-sans);
   background-color: var(--bg);
   color: var(--text);
+  /* Cursor personalizado de Mate */
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" style="font-size:24px"><text y="24">🧉</text></svg>'), auto !important;
 }
 
 body {
   overflow-x: hidden;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+a, button, input {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" style="font-size:24px"><text y="24">🧉</text></svg>'), pointer !important;
 }
 
-/* HEADER FLOTANTE CON EFECTO VIDRIO */
+/* HEADER FLOTANTE CON NAVEGACIÓN Y BOMBILLAS BAJO CADA OPCIÓN */
 header {
   position: fixed;
   top: 0;
@@ -44,8 +45,8 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 5%;
-  background: rgba(21, 20, 17, 0.75);
+  padding: 0 4%;
+  background: rgba(21, 20, 17, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
@@ -55,6 +56,7 @@ header {
   display: flex;
   align-items: center;
   gap: 12px;
+  text-decoration: none;
 }
 
 .badge {
@@ -74,71 +76,78 @@ header {
 .brand-info strong {
   font-size: 1rem;
   letter-spacing: 1px;
+  color: var(--text);
 }
 
 .brand-info small {
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   color: var(--gold);
   letter-spacing: 1px;
 }
 
-nav {
+/* Menú de Navegación con Bombillas */
+.nav-menu {
   display: flex;
-  gap: 2rem;
+  gap: 1.8rem;
+  align-items: center;
 }
 
-nav a {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  transition: color 0.3s ease;
-}
-
-nav a:hover {
-  color: var(--gold);
-}
-
-/* BOTÓN BOMBILLA + NOSOTROS */
-.btn-bombilla-nosotros {
+.nav-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 2px;
-  padding: 8px 16px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: rgba(28, 26, 23, 0.6);
-  color: var(--gold);
-  transition: all 0.3s ease;
+  gap: 3px;
   text-decoration: none;
+  transition: all 0.3s ease;
 }
 
-.btn-bombilla-nosotros .bombilla-icon {
-  stroke: var(--gold);
-  transform: rotate(-90deg);
-  transition: transform 0.3s ease, stroke 0.3s ease;
-}
-
-.btn-bombilla-nosotros span {
-  font-size: 0.72rem;
+.nav-item span {
+  font-size: 0.82rem;
   font-weight: 600;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
   color: var(--text-muted);
   transition: color 0.3s ease;
 }
 
-.btn-bombilla-nosotros:hover {
-  border-color: var(--gold);
-  background: rgba(214, 164, 109, 0.1);
-  transform: translateY(-2px);
+.bombilla-nav {
+  stroke: var(--gold);
+  transform: rotate(-90deg);
+  opacity: 0.6;
+  transition: all 0.3s ease;
 }
 
-.btn-bombilla-nosotros:hover .bombilla-icon {
-  transform: rotate(-90deg) scale(1.1);
-}
-
-.btn-bombilla-nosotros:hover span {
+.nav-item:hover span,
+.nav-item:focus span {
   color: var(--gold);
+}
+
+.nav-item:hover .bombilla-nav,
+.nav-item:focus .bombilla-nav {
+  opacity: 1;
+  transform: rotate(-90deg) scale(1.15);
+}
+
+/* Botón WhatsApp Directo en Header */
+.btn-header-wsp {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #c47b4a 0%, #a0522d 100%);
+  color: #ffffff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(196, 123, 74, 0.3);
+}
+
+.btn-header-wsp:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(196, 123, 74, 0.5);
 }
 
 /* SECCIÓN HERO CON NAVEGACIÓN Y RENDERIZADO HD */
@@ -232,6 +241,7 @@ nav a:hover {
   padding: 14px 28px;
   border-radius: 30px;
   transition: transform 0.3s ease, background 0.3s ease;
+  text-decoration: none;
 }
 
 .btn-primary:hover {
@@ -256,6 +266,7 @@ nav a:hover {
   display: flex;
   align-items: center;
   gap: 10px;
+  text-decoration: none;
 }
 
 .scroll-indicator span {
@@ -549,6 +560,7 @@ nav a:hover {
   width: 100%;
   text-align: center;
   display: block;
+  text-decoration: none;
 }
 
 /* SECCIÓN MÚSICA & MATE */
@@ -742,6 +754,7 @@ nav a:hover {
   border-radius: 12px;
   font-size: 0.9rem;
   transition: all 0.3s ease;
+  text-decoration: none;
 }
 
 .btn-spotify-bottom:hover {
@@ -940,9 +953,28 @@ footer small {
   color: var(--text-muted);
 }
 
+footer nav {
+  display: flex;
+  gap: 2rem;
+}
+
+footer nav a {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+footer nav a:hover {
+  color: var(--gold);
+}
+
 /* RESPONSIVE */
+@media (max-width: 992px) {
+  .nav-menu { display: none; }
+}
+
 @media (max-width: 768px) {
-  nav { display: none; }
   .about-section { grid-template-columns: 1fr; text-align: center; }
   .about-logo-wrapper { max-width: 240px; margin: 0 auto; }
   .contact-section { 
