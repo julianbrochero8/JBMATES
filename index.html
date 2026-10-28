@@ -15,6 +15,22 @@
 </head>
 <body>
 
+  <!-- POPUP DE TÉRMINOS Y CONDICIONES (PRIMERA VISITA) -->
+  <div id="modalTerminosGlobal" class="terminos-overlay">
+    <div class="terminos-modal-box">
+      <h3>Bienvenido a JB MATES 🧉</h3>
+      <p>Para navegar en nuestra tienda y conocer nuestras piezas artesanales, por favor aceptá nuestros términos, condiciones y políticas de cambio exigidas por la normativa vigente.</p>
+      
+      <div class="terminos-links-mini">
+        <a href="#terminos" onclick="cerrarTerminosGlobal()">Ver Términos y Condiciones completos ↗</a>
+      </div>
+
+      <button type="button" class="btn-primary btn-aceptar-legal" onclick="aceptarTerminosGlobal()">
+        Aceptar y Continuar <span>→</span>
+      </button>
+    </div>
+  </div>
+
   <!-- Encabezado / Navegación Estilo Premium -->
   <header>
     <a href="#inicio" class="logo" aria-label="JB MATES, inicio">
@@ -545,6 +561,24 @@
 
   <!-- SCRIPT -->
   <script>
+    // Verificar si ya aceptó los términos al cargar la página
+    window.addEventListener('DOMContentLoaded', () => {
+      const aceptoLegal = localStorage.getItem('jb_mates_terminos_aceptados');
+      if (!aceptoLegal) {
+        document.getElementById('modalTerminosGlobal').classList.add('mostrar');
+      }
+    });
+
+    function aceptarTerminosGlobal() {
+      localStorage.setItem('jb_mates_terminos_aceptados', 'true');
+      document.getElementById('modalTerminosGlobal').classList.remove('mostrar');
+    }
+
+    function cerrarTerminosGlobal() {
+      localStorage.setItem('jb_mates_terminos_aceptados', 'true');
+      document.getElementById('modalTerminosGlobal').classList.remove('mostrar');
+    }
+
     function abrirModalVideo(nombreProducto, urlVideo) {
       document.getElementById('modalTitulo').innerText = nombreProducto;
       const player = document.getElementById('videoPlayer');
