@@ -56,7 +56,7 @@
   </header>
 
   <main>
-    <!-- Seccion Hero con Imagen HD Nativa -->
+    <!-- Seccion Hero -->
     <section id="inicio" class="hero">
       <div class="hero-bg-wrapper">
         <img src="hero-bg.jpg" alt="JB Mates artesanal" class="hero-img-hd" decoding="async">
@@ -391,7 +391,7 @@
       </div>
     </section>
 
-    <!-- Sección Nosotros (Con tu Logo Oficial logo.jpg) -->
+    <!-- Sección Nosotros -->
     <section id="nosotros" class="about-section">
       <div class="about-content">
         <p class="tagline"><span></span> SOBRE JB MATES</p>
@@ -461,6 +461,26 @@
         </a>
       </div>
     </section>
+
+    <!-- SECCIÓN: TÉRMINOS Y CONDICIONES Y BOTÓN DE ARREPENTIMIENTO -->
+    <section id="terminos" class="terms-section">
+      <div class="terms-container">
+        <h3>Términos, Condiciones y Políticas de Cambio</h3>
+        <div class="terms-content">
+          <p><strong>1. Medios de Compra y Coordinación:</strong> Todas las consultas, reservas y ventas (tanto minoristas como combos mayoristas) se coordinan directamente a través de nuestros canales oficiales de atención (WhatsApp e Instagram).</p>
+          <p><strong>2. Cambios y Devoluciones:</strong> Al tratarse de productos artesanales y calabazas naturales, se aceptan cambios por defectos de fabricación dentro de los 10 (diez) días corridos posteriores a la recepción de la pieza, siempre y cuando se encuentre sin uso y en las mismas condiciones en que fue entregada.</p>
+          <p><strong>3. Envíos:</strong> Los plazos y costos de envíos se coordinan de forma personalizada con cada cliente al momento de concretar la compra.</p>
+        </div>
+
+        <!-- BOTÓN DE ARREPENTIMIENTO LEY DEF. CONSUMIDOR N° 24.240 -->
+        <div class="arrepentimiento-wrapper">
+          <button type="button" class="btn-arrepentimiento" onclick="abrirModalArrepentimiento()">
+            ↩ BOTÓN DE ARREPENTIMIENTO
+          </button>
+          <p class="arrepentimiento-info">Según la Ley de Defensa del Consumidor, tenés derecho a revocar la compra realizada dentro de los 10 días corridos de recibida la mercadería.</p>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- Pie de página -->
@@ -479,6 +499,7 @@
       <a href="#musica">Banda Sonora</a>
       <a href="#nosotros">Nosotros</a>
       <a href="#contacto">Contacto</a>
+      <a href="#terminos">Términos y Políticas</a>
     </nav>
     <small>© JB MATES. Todos los derechos reservados.</small>
   </footer>
@@ -497,6 +518,28 @@
       <a id="modalWspBtn" href="#" target="_blank" rel="noopener" class="btn-primary modal-wsp-link">
         Consultar disponibilidad por WhatsApp <span>→</span>
       </a>
+    </div>
+  </div>
+
+  <!-- MODAL DE BOTÓN DE ARREPENTIMIENTO -->
+  <div id="modalArrepentimiento" class="modal-overlay">
+    <div class="modal-content">
+      <button type="button" class="modal-close" onclick="cerrarModalArrepentimiento()">✕</button>
+      <h3 style="color: var(--gold);">Solicitar Arrepentimiento de Compra</h3>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">Ingresá tus datos para que un representante coordine la revocación de tu pedido según la normativa vigente.</p>
+      
+      <div class="input-group" style="margin-bottom: 12px;">
+        <label>N° DE PEDIDO O DNI DE COMPRA</label>
+        <input type="text" id="arrPedido" placeholder="Ej: Pedido #1234 / DNI">
+      </div>
+      <div class="input-group" style="margin-bottom: 20px;">
+        <label>TELÉFONO O EMAIL</label>
+        <input type="text" id="arrContacto" placeholder="Ej: 351 1234567">
+      </div>
+
+      <button type="button" class="btn-primary" style="width: 100%; text-align: center; border: none; cursor: pointer;" onclick="enviarArrepentimientoWsp()">
+        Enviar Solicitud de Arrepentimiento <span>→</span>
+      </button>
     </div>
   </div>
 
@@ -524,6 +567,28 @@
       const player = document.getElementById('videoPlayer');
       player.pause();
       modal.classList.remove('active');
+    }
+
+    function abrirModalArrepentimiento() {
+      document.getElementById('modalArrepentimiento').classList.add('active');
+    }
+
+    function cerrarModalArrepentimiento() {
+      document.getElementById('modalArrepentimiento').classList.remove('active');
+    }
+
+    function enviarArrepentimientoWsp() {
+      const pedido = document.getElementById('arrPedido').value.trim();
+      const contacto = document.getElementById('arrContacto').value.trim();
+
+      if (!pedido || !contacto) {
+        alert("Por favor completa el número de pedido/DNI y tu contacto.");
+        return;
+      }
+
+      const mensaje = encodeURIComponent(`Hola JB MATES, solicito formalmente el arrepentimiento/cancelación de mi compra.\n\nDatos:\n- Pedido/DNI: ${pedido}\n- Contacto: ${contacto}`);
+      window.open(`https://wa.me/5493547639421?text=${mensaje}`, '_blank');
+      cerrarModalArrepentimiento();
     }
 
     function enviarCancionWsp() {
