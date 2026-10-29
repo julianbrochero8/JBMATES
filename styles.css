@@ -209,7 +209,7 @@ header {
 
 .hero h1 {
   font-family: var(--font-heading);
-  font-size:.clamp(2.5rem, 5vw, 4.5rem);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
   line-height: 1.15;
   margin-bottom: 1.2rem;
   color: #fff;
@@ -313,7 +313,7 @@ header {
 }
 
 /* ==========================================================================
-   Sección Tienda y Tarjetas de Productos
+   Sección Tienda y Tarjetas de Productos (Con Scroll Reveal)
    ================================================================---------- */
 .products-section {
   padding: 6rem 5%;
@@ -352,7 +352,17 @@ header {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: var(--transition);
+  transition: transform 0.4s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  
+  /* Estados iniciales para la animación al hacer scroll */
+  opacity: 0;
+  transform: translateY(40px);
+  will-change: opacity, transform;
+}
+
+.card.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .card:hover {
@@ -377,21 +387,6 @@ header {
 
 .card:hover .card-img-container img {
   transform: scale(1.04);
-}
-
-.badge-tag {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  background: rgba(15, 15, 14, 0.85);
-  backdrop-filter: blur(6px);
-  color: var(--gold);
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 20px;
-  border: 1px solid var(--border-color);
-  letter-spacing: 0.5px;
 }
 
 .card-body {
@@ -689,7 +684,7 @@ header {
 
 .quote-section blockquote {
   font-family: var(--font-heading);
-  font-size:.clamp(1.5rem, 3vw, 2.2rem);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
   color: var(--gold);
   line-height: 1.4;
   margin-top: 1rem;
