@@ -313,7 +313,7 @@ header {
 }
 
 /* ==========================================================================
-   Sección Tienda y Tarjetas de Productos (Con Scroll Reveal Suave y Delicado)
+   Sección Tienda y Tarjetas de Productos (Con Scroll Reveal Delicado)
    ================================================================---------- */
 .products-section {
   padding: 6rem 5%;
@@ -354,7 +354,7 @@ header {
   flex-direction: column;
   transition: transform 0.4s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   
-  /* Transición delicada y fluida (Desvanecimiento + desplazamiento sutil) */
+  /* Animación delicada y fluida al hacer scroll */
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
@@ -366,7 +366,6 @@ header {
   transform: translateY(0);
 }
 
-/* Efecto escalonado suave para las tarjetas */
 .product-grid .card:nth-child(2) { transition-delay: 0.1s; }
 .product-grid .card:nth-child(3) { transition-delay: 0.2s; }
 .product-grid .card:nth-child(4) { transition-delay: 0.3s; }
@@ -412,8 +411,36 @@ header {
 .card-body p {
   font-size: 0.85rem;
   color: var(--text-muted);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
   flex-grow: 1;
+}
+
+/* Estilo de Precio Elegante */
+.product-price-box {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  background: rgba(212, 175, 55, 0.05);
+  border: 1px solid rgba(212, 175, 55, 0.12);
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  margin-bottom: 1.2rem;
+}
+
+.price-label {
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.price-value {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  color: var(--gold);
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 .product-actions {
