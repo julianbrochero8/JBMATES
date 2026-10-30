@@ -313,7 +313,7 @@ header {
 }
 
 /* ==========================================================================
-   Sección Tienda y Tarjetas de Productos (Con Scroll Reveal)
+   Sección Tienda y Tarjetas de Productos (Con Scroll Reveal Suave y Delicado)
    ================================================================---------- */
 .products-section {
   padding: 6rem 5%;
@@ -354,9 +354,10 @@ header {
   flex-direction: column;
   transition: transform 0.4s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   
-  /* Estados iniciales para la animación al hacer scroll */
+  /* Transición delicada y fluida (Desvanecimiento + desplazamiento sutil) */
   opacity: 0;
-  transform: translateY(40px);
+  transform: translateY(20px);
+  transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
   will-change: opacity, transform;
 }
 
@@ -364,6 +365,11 @@ header {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Efecto escalonado suave para las tarjetas */
+.product-grid .card:nth-child(2) { transition-delay: 0.1s; }
+.product-grid .card:nth-child(3) { transition-delay: 0.2s; }
+.product-grid .card:nth-child(4) { transition-delay: 0.3s; }
 
 .card:hover {
   transform: translateY(-5px);
