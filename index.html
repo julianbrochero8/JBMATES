@@ -551,12 +551,12 @@
         document.getElementById('modalTerminosGlobal').classList.add('mostrar');
       }
 
-      // Animación de aparición al hacer scroll (Scroll Reveal)
+      // Animación de aparición delicada y progresiva (Scroll Reveal Suave)
       const cards = document.querySelectorAll(".card");
       const observerOptions = {
         root: null,
-        rootMargin: "0px 0px -50px 0px",
-        threshold: 0.15
+        rootMargin: "0px 0px -100px 0px",
+        threshold: 0.05
       };
 
       const observerCallback = (entries, observer) => {
