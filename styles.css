@@ -432,30 +432,6 @@ header {
   letter-spacing: 0.5px;
 }
 
-/* INSIGNIA "VER PIEZA" EN IMAGEN (ABAJO IZQUIERDA) */
-.ver-pieza-badge {
-  position: absolute;
-  bottom: 12px;
-  left: 12px;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 0.3rem 0.75rem;
-  border-radius: 8px;
-  color: #fff;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  transition: var(--transition);
-  z-index: 10;
-}
-
-.card-img-container:hover .ver-pieza-badge {
-  background: var(--gold);
-  color: #000;
-  border-color: var(--gold);
-}
-
 .card-body {
   padding: 1.5rem;
   display: flex;
@@ -477,31 +453,63 @@ header {
   flex-grow: 1;
 }
 
+/* BOTONES ABAJO (VER PIEZA Y WHATSAPP) */
 .product-actions {
   display: flex;
   gap: 10px;
   align-items: center;
 }
 
+/* Botón "Ver Pieza" estilo pastilla marrón/óxido */
+.btn-ver-pieza {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--accent-rust);
+  color: #fff;
+  border: none;
+  flex-grow: 1;
+  height: 46px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(160, 82, 45, 0.25);
+}
+
+.btn-ver-pieza:hover {
+  background: var(--accent-rust-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(160, 82, 45, 0.4);
+}
+
+/* Botón cuadrado de WhatsApp */
 .btn-wsp-square {
   background: rgba(37, 211, 102, 0.12);
   color: var(--whatsapp);
   border: 1px solid rgba(37, 211, 102, 0.3);
-  width: 100%;
+  width: 46px;
   height: 46px;
-  border-radius: 10px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: var(--transition);
   text-decoration: none;
-  font-weight: 700;
-  font-size: 0.85rem;
+  flex-shrink: 0;
 }
 
 .btn-wsp-square:hover {
   background: var(--whatsapp);
   color: #fff;
+}
+
+/* Botón ancho de WhatsApp para productos sin video */
+.btn-wsp-full {
+  width: 100%;
 }
 
 .disclaimer {
