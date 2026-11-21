@@ -352,11 +352,14 @@ header {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform 0.4s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-  
+
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+  transition:
+    opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1),
+    transform 1.2s cubic-bezier(0.25, 1, 0.5, 1),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
   will-change: opacity, transform;
 }
 
@@ -518,6 +521,50 @@ header {
   font-size: 0.8rem;
   color: var(--text-muted);
   font-style: italic;
+}
+
+/* ==========================================================================
+   Producto Agotado (cinta diagonal)
+   ================================================================---------- */
+.ribbon-agotado {
+  position: absolute;
+  top: 34px;
+  left: -58px;
+  width: 230px;
+  padding: 9px 0;
+  transform: rotate(-45deg);
+  text-align: center;
+  z-index: 5; /* debajo de la píldora de precio (z-index 10) */
+  pointer-events: none;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #26231b 50%, var(--bg-card) 100%);
+  border-top: 1px solid var(--gold);
+  border-bottom: 1px solid var(--gold);
+  box-shadow:
+    0 0 0 3px rgba(24, 24, 22, 0.85),
+    0 0 0 4px rgba(212, 175, 55, 0.4),
+    0 10px 22px rgba(0, 0, 0, 0.6);
+}
+
+.ribbon-agotado span {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.32em;
+  padding-left: 0.32em; /* compensa el espaciado para centrar el texto */
+  background: linear-gradient(90deg, var(--gold), var(--gold-hover), var(--gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Foto y precio apagados (opcional: borrar si solo querés la cinta) */
+.card--agotado .card-img-container img {
+  filter: grayscale(35%) brightness(0.85);
+}
+
+.card--agotado .price-txt-val {
+  text-decoration: line-through;
+  opacity: 0.6;
 }
 
 /* ==========================================================================
@@ -978,7 +1025,7 @@ footer small {
   overflow-y: auto;
 }
 
-.modal-overlay.active .modal-content-detalle, 
+.modal-overlay.active .modal-content-detalle,
 .terminos-overlay.mostrar .terminos-modal-box,
 .modal-overlay.active .modal-content {
   transform: scale(1);
@@ -1184,12 +1231,12 @@ footer small {
   .nav-menu {
     display: none;
   }
-  
+
   .about-section, .contact-section {
     grid-template-columns: 1fr;
     gap: 2.5rem;
   }
-  
+
   .music-form-box {
     grid-template-columns: 1fr;
   }
@@ -1199,12 +1246,21 @@ footer small {
   header {
     padding: 1rem;
   }
-  
+
   .hero h1 {
     font-size: 2.2rem;
   }
-  
+
   .section-header h2 {
     font-size: 2rem;
+  }
+
+  .ribbon-agotado {
+    top: 28px;
+    left: -62px;
+  }
+
+  .ribbon-agotado span {
+    font-size: 0.85rem;
   }
 }
