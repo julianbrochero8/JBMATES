@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>JB MATES | Tradición y Cultura</title>
-  
+
   <!-- Fuentes Google -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
-  
+
   <!-- Estilos CSS -->
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -20,7 +20,7 @@
     <div class="terminos-modal-box">
       <h3>Bienvenido a JB MATES 🧉</h3>
       <p>Para navegar en nuestra tienda y conocer nuestras piezas artesanales, por favor aceptá nuestros términos, condiciones y políticas de cambio exigidas por la normativa vigente.</p>
-      
+
       <div class="terminos-links-mini">
         <a href="#terminos" onclick="cerrarTerminosGlobal()">Ver Términos y Condiciones completos ↗</a>
       </div>
@@ -40,7 +40,7 @@
         <small>TRADICIÓN Y CULTURA</small>
       </span>
     </a>
-    
+
     <nav class="nav-menu">
       <a href="#inicio" class="nav-item">
         <span>INICIO</span>
@@ -63,7 +63,7 @@
         <svg class="bombilla-nav" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h16"></path><path d="M18 9l3 3-3 3"></path><path d="M6 15c0 1.5 1 2.5 2.5 2.5h3c1.5 0 2.5-1 2.5-2.5V9H6v6z"></path></svg>
       </a>
     </nav>
-    
+
     <!-- Botón WhatsApp Directo en Header -->
     <a href="https://wa.me/5493547639421?text=Hola!%20Quiero%20consultar%20sobre%20los%20mates%20y%20accesorios" target="_blank" rel="noopener" class="btn-header-wsp">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
@@ -78,7 +78,7 @@
         <img src="hero-bg.jpg" alt="JB Mates artesanal" class="hero-img-hd" decoding="async">
       </div>
       <div class="hero-overlay" aria-hidden="true"></div>
-      
+
       <div class="hero-content">
         <p class="tagline"><span></span> TRADICIÓN Y CULTURA</p>
         <h1>Tradición, calidad<br>y estilo en cada mate.</h1>
@@ -238,10 +238,11 @@
           </div>
         </article>
 
-        <!-- 5. MATE IMPERIAL CRUDO ($40.899) -->
-        <article class="card">
+        <!-- 5. MATE IMPERIAL CRUDO ($40.899) — AGOTADO -->
+        <article class="card card--agotado">
           <div class="card-img-container">
-            <img src="imperial crudo.jpg" alt="Mate Imperial Crudo" loading="lazy">
+            <img src="imperial crudo.jpg" alt="Mate Imperial Crudo (agotado)" loading="lazy">
+            <div class="ribbon-agotado" aria-hidden="true"><span>AGOTADO</span></div>
             <div class="price-pill-badge">
               <span class="price-dot"></span>
               <span class="price-txt-lbl">PRECIO</span>
@@ -637,7 +638,7 @@
   <div id="modalDetalle" class="modal-overlay">
     <div class="modal-content-detalle">
       <button type="button" class="modal-close" onclick="cerrarModalDetalle()">✕</button>
-      
+
       <!-- Título del Producto -->
       <h3 id="detTitulo" class="det-titulo">Set Matero...</h3>
 
@@ -690,7 +691,7 @@
       <button type="button" class="modal-close" onclick="cerrarModalArrepentimiento()">✕</button>
       <h3 style="color: var(--gold);">Solicitar Arrepentimiento de Compra</h3>
       <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">Ingresá tus datos para que un representante coordine la revocación de tu pedido según la normativa vigente.</p>
-      
+
       <div class="input-group" style="margin-bottom: 12px;">
         <label>N° DE PEDIDO O DNI DE COMPRA</label>
         <input type="text" id="arrPedido" placeholder="Ej: Pedido #1234 / DNI">
