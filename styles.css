@@ -26,6 +26,10 @@
   scroll-behavior: smooth;
 }
 
+button {
+  font-family: inherit; /* los botones usan la misma tipografía que la página */
+}
+
 body {
   background-color: var(--bg-dark);
   color: var(--text-main);
@@ -88,6 +92,12 @@ header {
   font-size: 0.65rem;
   color: var(--text-muted);
   letter-spacing: 1.5px;
+  white-space: nowrap;
+}
+
+header .logo,
+.header-actions {
+  flex-shrink: 0;
 }
 
 .nav-menu {
@@ -106,6 +116,7 @@ header {
   display: flex;
   align-items: center;
   gap: 6px;
+  white-space: nowrap;
 }
 
 .nav-item:hover {
@@ -143,6 +154,36 @@ header {
   background: var(--whatsapp);
   color: #fff;
   box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Botón de Arrepentimiento en el header (visible desde la primera pantalla) */
+.btn-header-arrepentimiento {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  padding: 0.6rem 1rem;
+  border-radius: 50px;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-header-arrepentimiento:hover {
+  background: var(--gold);
+  color: var(--bg-dark);
+  border-color: var(--gold);
 }
 
 /* ==========================================================================
@@ -521,6 +562,22 @@ header {
   font-size: 0.8rem;
   color: var(--text-muted);
   font-style: italic;
+}
+
+.disclaimer-legal {
+  text-align: center;
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.disclaimer-legal a {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.disclaimer-legal a:hover {
+  text-decoration: underline;
 }
 
 /* ==========================================================================
@@ -938,6 +995,131 @@ header {
   color: var(--text-muted);
 }
 
+.terms-intro {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1.8rem;
+}
+
+/* Acordeón de secciones legales */
+.terms-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 2rem;
+}
+
+.terms-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: var(--transition);
+  scroll-margin-top: 100px; /* que el header fijo no tape el título */
+}
+
+.terms-item[open] {
+  border-color: rgba(212, 175, 55, 0.35);
+}
+
+.terms-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 1rem 1.3rem;
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  transition: var(--transition);
+}
+
+.terms-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.terms-item summary::after {
+  content: '+';
+  font-family: var(--font-sans);
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--gold);
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.terms-item[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.terms-item summary:hover {
+  color: var(--gold);
+}
+
+.terms-body {
+  padding: 0 1.3rem 1.3rem 1.3rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.terms-body strong {
+  color: var(--text-main);
+}
+
+.terms-body a {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.terms-body a:hover {
+  text-decoration: underline;
+}
+
+.datos-proveedor {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.datos-proveedor li {
+  padding-left: 1.1rem;
+  position: relative;
+}
+
+.datos-proveedor li::before {
+  content: '❖';
+  position: absolute;
+  left: 0;
+  top: 1px;
+  font-size: 0.65rem;
+  color: var(--gold);
+}
+
+.leyenda-aaip {
+  font-size: 0.72rem;
+  border-left: 2px solid rgba(212, 175, 55, 0.4);
+  padding-left: 0.9rem;
+  font-style: italic;
+}
+
+/* Marca visual de datos pendientes: BORRAR la clase cuando completes cada dato */
+.dato-completar {
+  color: #e8a33d;
+  background: rgba(232, 163, 61, 0.1);
+  border: 1px dashed rgba(232, 163, 61, 0.5);
+  border-radius: 4px;
+  padding: 0 0.35rem;
+  font-size: 0.95em;
+}
+
 /* ==========================================================================
    Pie de Página
    ================================================================---------- */
@@ -975,7 +1157,47 @@ footer nav a:hover {
   color: var(--gold);
 }
 
-footer small {
+.footer-legal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 700px;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.btn-arrepentimiento-footer {
+  margin-bottom: 0;
+}
+
+.footer-defensa {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.footer-defensa strong {
+  color: var(--gold);
+}
+
+.footer-defensa:hover {
+  color: var(--text-main);
+}
+
+.footer-datafiscal img {
+  height: 70px;
+  width: auto;
+  border-radius: 6px;
+}
+
+footer p.footer-proveedor {
+  font-size: 0.75rem;
+}
+
+footer > small {
   font-size: 0.75rem;
   color: rgba(255,255,255,0.3);
   margin-top: 1rem;
@@ -1046,6 +1268,94 @@ footer small {
 
 .modal-close:hover {
   color: #fff;
+}
+
+/* Popup de bienvenida (términos) */
+.terminos-modal-box h3 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 0.8rem;
+}
+
+.terminos-modal-box p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 1.2rem;
+}
+
+.terminos-links-mini {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 1.5rem;
+}
+
+.terminos-links-mini a {
+  color: var(--gold);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.terminos-links-mini a:hover {
+  text-decoration: underline;
+}
+
+.btn-aceptar-legal {
+  width: 100%;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-sans);
+}
+
+/* Modal del Botón de Arrepentimiento */
+.arr-titulo {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  color: #fff;
+  margin-bottom: 0.6rem;
+  padding-right: 25px;
+  line-height: 1.3;
+}
+
+.arr-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1.3rem;
+}
+
+.arr-desc strong {
+  color: var(--text-main);
+}
+
+.arr-campo {
+  margin-bottom: 12px;
+}
+
+.arr-campo-ultimo {
+  margin-bottom: 20px;
+}
+
+.btn-arr-enviar {
+  width: 100%;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-sans);
+}
+
+.arr-nota {
+  margin-top: 0.9rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.arr-nota a {
+  color: var(--gold);
+  text-decoration: none;
 }
 
 .det-titulo {
@@ -1227,6 +1537,45 @@ footer small {
 /* ==========================================================================
    Diseño Adaptativo (Responsive Design)
    ================================================================---------- */
+/* Header: hacer lugar para el Botón de Arrepentimiento */
+@media (max-width: 1460px) {
+  .nav-menu {
+    gap: 1.5rem;
+  }
+
+  .btn-header-wsp .lbl-largo {
+    display: none;
+  }
+
+  .btn-header-wsp {
+    padding: 0.6rem 0.8rem;
+  }
+}
+
+@media (max-width: 1290px) {
+  .nav-menu {
+    gap: 1rem;
+  }
+
+  .nav-item {
+    font-size: 0.75rem;
+  }
+
+  header .brand-info {
+    display: none;
+  }
+}
+
+@media (max-width: 1020px) {
+  .nav-menu {
+    display: none;
+  }
+
+  header .brand-info {
+    display: flex;
+  }
+}
+
 @media (max-width: 900px) {
   .nav-menu {
     display: none;
@@ -1247,6 +1596,21 @@ footer small {
     padding: 1rem;
   }
 
+  /* En celular: el logo queda solo con "JB", WhatsApp solo con ícono
+     y el Botón de Arrepentimiento conserva su texto (debe verse claramente) */
+  header .brand-info {
+    display: none;
+  }
+
+  .btn-header-wsp .lbl-largo {
+    display: none;
+  }
+
+  .btn-header-arrepentimiento,
+  .btn-header-wsp {
+    padding: 0.55rem 0.8rem;
+  }
+
   .hero h1 {
     font-size: 2.2rem;
   }
@@ -1263,4 +1627,14 @@ footer small {
   .ribbon-agotado span {
     font-size: 0.85rem;
   }
+}
+
+/* Enlace de email en el pie de página */
+footer .footer-proveedor a {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+footer .footer-proveedor a:hover {
+  text-decoration: underline;
 }
