@@ -22,7 +22,8 @@
       <p>Para navegar en nuestra tienda y conocer nuestras piezas artesanales, por favor aceptá nuestros términos, condiciones y políticas de cambio exigidas por la normativa vigente.</p>
 
       <div class="terminos-links-mini">
-        <a href="#terminos" onclick="cerrarTerminosGlobal()">Ver Términos y Condiciones completos ↗</a>
+        <a href="#terminos" onclick="cerrarTerminosTemporal()">Ver Términos y Condiciones ↗</a>
+        <a href="#privacidad" onclick="cerrarTerminosTemporal()">Ver Política de Privacidad ↗</a>
       </div>
 
       <button type="button" class="btn-primary btn-aceptar-legal" onclick="aceptarTerminosGlobal()">
@@ -64,11 +65,19 @@
       </a>
     </nav>
 
-    <!-- Botón WhatsApp Directo en Header -->
-    <a href="https://wa.me/5493547639421?text=Hola!%20Quiero%20consultar%20sobre%20los%20mates%20y%20accesorios" target="_blank" rel="noopener" class="btn-header-wsp">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
-      <span>WHATSAPP DIRECTO</span>
-    </a>
+    <div class="header-actions">
+      <!-- Botón de Arrepentimiento (Res. SCI 424/2020: visible desde la primera pantalla) -->
+      <button type="button" class="btn-header-arrepentimiento" onclick="abrirModalArrepentimiento()" aria-label="Botón de arrepentimiento">
+        <span aria-hidden="true">↩</span>
+        <span class="lbl-largo">ARREPENTIMIENTO</span>
+      </button>
+
+      <!-- Botón WhatsApp Directo en Header -->
+      <a href="https://wa.me/5493547639421?text=Hola!%20Quiero%20consultar%20sobre%20los%20mates%20y%20accesorios" target="_blank" rel="noopener" class="btn-header-wsp" aria-label="WhatsApp directo">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+        <span class="lbl-largo">WHATSAPP DIRECTO</span>
+      </a>
+    </div>
   </header>
 
   <main>
@@ -454,6 +463,7 @@
 
       </div>
       <p class="disclaimer">Las imágenes y videos son de modo ilustrativo.</p>
+      <p class="disclaimer-legal">Precios finales expresados en pesos argentinos (ARS), IVA incluido. Stock sujeto a disponibilidad al momento de confirmar la compra. Ver <a href="#terminos">Términos y Condiciones</a>.</p>
     </section>
 
     <!-- SECCIÓN: MÚSICA & MATE -->
@@ -595,19 +605,101 @@
     <!-- SECCIÓN: TÉRMINOS Y CONDICIONES Y BOTÓN DE ARREPENTIMIENTO -->
     <section id="terminos" class="terms-section">
       <div class="terms-container">
-        <h3>Términos, Condiciones y Políticas de Cambio</h3>
-        <div class="terms-content">
-          <p><strong>1. Medios de Compra y Coordinación:</strong> Todas las consultas, reservas y ventas (tanto minoristas como combos mayoristas) se coordinan directamente a través de nuestros canales oficiales de atención (WhatsApp e Instagram).</p>
-          <p><strong>2. Cambios y Devoluciones:</strong> Al tratarse de productos artesanales y calabazas naturales, se aceptan cambios por defectos de fabricación dentro de los 10 (diez) días corridos posteriores a la recepción de la pieza, siempre y cuando se encuentre sin uso y en las mismas condiciones en que fue entregada.</p>
-          <p><strong>3. Envíos:</strong> Los plazos y costos de envíos se coordinan de forma personalizada con cada cliente al momento de concretar la compra.</p>
-        </div>
+        <p class="tagline"><span></span> INFORMACIÓN LEGAL</p>
+        <h3>Términos, Condiciones y Políticas</h3>
+        <p class="terms-intro">Última actualización: 21 de noviembre de 2026. Al realizar una compra en JB MATES aceptás estas condiciones, que se rigen por la Ley 24.240 de Defensa del Consumidor, el Código Civil y Comercial de la Nación y la normativa vigente.</p>
 
         <!-- BOTÓN DE ARREPENTIMIENTO -->
         <div class="arrepentimiento-wrapper">
           <button type="button" class="btn-arrepentimiento" onclick="abrirModalArrepentimiento()">
             ↩ BOTÓN DE ARREPENTIMIENTO
           </button>
-          <p class="arrepentimiento-info">Según la Ley de Defensa del Consumidor, tenés derecho a revocar la compra realizada dentro de los 10 días corridos de recibida la mercadería.</p>
+          <p class="arrepentimiento-info">Tenés derecho a revocar tu compra dentro de los 10 días corridos desde que recibiste el producto, sin dar motivos y sin costo (art. 34 Ley 24.240 y art. 1110 del Código Civil y Comercial). No necesitás registrarte.</p>
+        </div>
+
+        <div class="terms-accordion">
+
+          <details class="terms-item" open>
+            <summary>1. Datos del vendedor</summary>
+            <div class="terms-body">
+              <ul class="datos-proveedor">
+                <li><strong>Titular / Razón social:</strong> Julián Brochero</li>
+                <li><strong>CUIT/CUIL:</strong> 20-45696683-8</li>
+                <li><strong>Condición frente al IVA:</strong> Responsable Inscripto</li>
+                <li><strong>Domicilio:</strong> Córdoba, Argentina</li>
+                <li><strong>Teléfono / WhatsApp:</strong> +54 9 3547 63-9421</li>
+                <li><strong>Email:</strong> <a href="mailto:julianbrochero13@gmail.com">julianbrochero13@gmail.com</a></li>
+                <li><strong>Nombre comercial:</strong> JB MATES</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="terms-item">
+            <summary>2. Precios y medios de compra</summary>
+            <div class="terms-body">
+              <p>Todos los precios publicados son finales, expresados en pesos argentinos (ARS) e incluyen IVA. Los costos de envío no están incluidos y se informan antes de confirmar la compra.</p>
+              <p>Las consultas, reservas y ventas (minoristas y mayoristas) se coordinan por nuestros canales oficiales (WhatsApp e Instagram). La compra se considera confirmada cuando acordamos producto, precio, envío y medio de pago, y te enviamos el comprobante correspondiente.</p>
+              <p>Los precios y el stock pueden modificarse sin previo aviso, pero siempre se respeta el precio informado al momento de confirmar la compra. Los productos marcados como "AGOTADO" no están disponibles para la venta.</p>
+            </div>
+          </details>
+
+          <details class="terms-item">
+            <summary>3. Envíos y entregas</summary>
+            <div class="terms-body">
+              <p>Los plazos, costos y modalidades de envío se coordinan con cada cliente antes de concretar la compra. El plazo de entrega comienza a correr una vez acreditado el pago. Te informaremos el número de seguimiento cuando corresponda.</p>
+            </div>
+          </details>
+
+          <details class="terms-item" id="revocacion">
+            <summary>4. Derecho de arrepentimiento (revocación)</summary>
+            <div class="terms-body">
+              <p>Por tratarse de una venta a distancia, podés revocar la compra dentro de los <strong>10 (diez) días corridos</strong> contados desde la entrega del producto o la celebración del contrato, lo último que ocurra, sin necesidad de justificar el motivo y sin penalidad alguna.</p>
+              <p>Para hacerlo, usá el <a href="#" onclick="abrirModalArrepentimiento(); return false;">Botón de Arrepentimiento</a>. Dentro de las 24 horas te informaremos un <strong>código de identificación</strong> de tu solicitud.</p>
+              <p>El producto debe devolverse en las mismas condiciones en que fue recibido. <strong>Los gastos de devolución corren por cuenta de JB MATES.</strong> Te reintegraremos el importe total abonado por el mismo medio de pago utilizado.</p>
+            </div>
+          </details>
+
+          <details class="terms-item">
+            <summary>5. Cambios</summary>
+            <div class="terms-body">
+              <p>Además del derecho de arrepentimiento, aceptamos cambios por modelo, color o preferencia dentro de los 10 (diez) días corridos posteriores a la recepción, siempre que la pieza esté sin uso (sin curar) y en las mismas condiciones en que fue entregada. Los costos de envío por cambio de preferencia se coordinan con el cliente.</p>
+              <p>Al tratarse de piezas artesanales y calabazas naturales, pueden existir pequeñas diferencias de tono, veta, forma o terminación respecto de las imágenes. Estas variaciones son propias del trabajo artesanal y no constituyen un defecto.</p>
+            </div>
+          </details>
+
+          <details class="terms-item">
+            <summary>6. Garantía legal</summary>
+            <div class="terms-body">
+              <p>Todos nuestros productos cuentan con la <strong>garantía legal de 6 (seis) meses</strong> desde la entrega por defectos o vicios de fabricación (art. 11 Ley 24.240). La garantía no cubre el desgaste natural, golpes, caídas, mal uso, ni el deterioro propio de un curado o limpieza inadecuados.</p>
+              <p>Para hacer uso de la garantía, escribinos por WhatsApp con fotos del producto y tu comprobante de compra. Los costos de traslado por garantía corren por cuenta de JB MATES.</p>
+            </div>
+          </details>
+
+          <details class="terms-item" id="privacidad">
+            <summary>7. Política de privacidad y datos personales</summary>
+            <div class="terms-body">
+              <p>Los datos que nos facilites (nombre, teléfono, email, DNI, domicilio de envío) se usan únicamente para gestionar tus consultas, compras, envíos, garantías y solicitudes de arrepentimiento. No se venden ni se ceden a terceros, salvo a la empresa de transporte en lo estrictamente necesario para realizar la entrega.</p>
+              <p>Los formularios de este sitio no almacenan datos en un servidor: arman un mensaje que se envía por WhatsApp, cuya privacidad se rige por las políticas de dicha plataforma. Este sitio solo guarda en tu navegador (almacenamiento local) si aceptaste los términos, para no volver a mostrarte el aviso.</p>
+              <p>Podés solicitar el acceso, la rectificación, la actualización o la supresión de tus datos en cualquier momento escribiéndonos por nuestros canales oficiales (Ley 25.326 de Protección de Datos Personales).</p>
+              <p class="leyenda-aaip">El titular de los datos personales tiene la facultad de ejercer el derecho de acceso a los mismos en forma gratuita a intervalos no inferiores a seis meses, salvo que se acredite un interés legítimo al efecto conforme lo establecido en el artículo 14, inciso 3 de la Ley N° 25.326. La AGENCIA DE ACCESO A LA INFORMACIÓN PÚBLICA, en su carácter de Órgano de Control de la Ley N° 25.326, tiene la atribución de atender las denuncias y reclamos que interpongan quienes resulten afectados en sus derechos por incumplimiento de las normas vigentes en materia de protección de datos personales.</p>
+            </div>
+          </details>
+
+          <details class="terms-item">
+            <summary>8. Propiedad intelectual</summary>
+            <div class="terms-body">
+              <p>La marca JB MATES, el logo, las fotografías, los videos y los textos de este sitio pertenecen a su titular y no pueden ser reproducidos sin autorización.</p>
+            </div>
+          </details>
+
+          <details class="terms-item">
+            <summary>9. Reclamos y jurisdicción</summary>
+            <div class="terms-body">
+              <p>Ante cualquier inconveniente, te pedimos que primero nos contactes por WhatsApp para resolverlo. También podés iniciar un reclamo ante la autoridad de aplicación en <a href="https://www.argentina.gob.ar/produccion/defensadelconsumidor/formulario" target="_blank" rel="noopener">Defensa de las y los Consumidores ↗</a>.</p>
+              <p>Para cualquier controversia serán competentes los tribunales correspondientes al domicilio del consumidor.</p>
+            </div>
+          </details>
+
         </div>
       </div>
     </section>
@@ -629,9 +721,39 @@
       <a href="#musica">Banda Sonora</a>
       <a href="#nosotros">Nosotros</a>
       <a href="#contacto">Contacto</a>
-      <a href="#terminos">Términos y Políticas</a>
+      <a href="#terminos">Términos y Condiciones</a>
+      <a href="#privacidad">Privacidad</a>
     </nav>
-    <small>© JB MATES. Todos los derechos reservados.</small>
+
+    <!-- BLOQUE LEGAL DEL PIE -->
+    <div class="footer-legal">
+      <button type="button" class="btn-arrepentimiento btn-arrepentimiento-footer" onclick="abrirModalArrepentimiento()">
+        ↩ BOTÓN DE ARREPENTIMIENTO
+      </button>
+
+      <a href="https://www.argentina.gob.ar/produccion/defensadelconsumidor/formulario" target="_blank" rel="noopener" class="footer-defensa">
+        Defensa de las y los Consumidores. Para reclamos <strong>ingresá aquí ↗</strong>
+      </a>
+
+      <!-- DATA FISCAL (ARCA ex-AFIP):
+           Reemplazá este bloque por el código que te da ARCA al adherir el sitio
+           (Formulario 960/D - "Data Fiscal"). Suele verse así:
+           <a href="http://qr.afip.gob.ar/?qr=TU_CODIGO" target="_F960AFIPInfo">
+             <img src="http://www.afip.gob.ar/images/f960/DATAWEB.jpg" border="0" alt="Data Fiscal">
+           </a>
+      -->
+      <!-- Cuando tengas el código de ARCA, pegalo acá adentro y quitá los comentarios:
+      <div class="footer-datafiscal">
+        PEGAR AQUÍ EL CÓDIGO DEL QR DE DATA FISCAL
+      </div>
+      -->
+
+      <p class="footer-proveedor">
+        Titular: Julián Brochero · Responsable Inscripto · CUIT/CUIL 20-45696683-8 · Córdoba, Argentina · <a href="mailto:julianbrochero13@gmail.com">julianbrochero13@gmail.com</a>
+      </p>
+    </div>
+
+    <small>© JB MATES. Todos los derechos reservados. Precios finales en ARS con IVA incluido.</small>
   </footer>
 
   <!-- MODAL DE DETALLE DE PRODUCTO CON REPRODUCTOR DE VIDEO AUTOMÁTICO -->
@@ -689,28 +811,39 @@
   <div id="modalArrepentimiento" class="modal-overlay">
     <div class="modal-content">
       <button type="button" class="modal-close" onclick="cerrarModalArrepentimiento()">✕</button>
-      <h3 style="color: var(--gold);">Solicitar Arrepentimiento de Compra</h3>
-      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">Ingresá tus datos para que un representante coordine la revocación de tu pedido según la normativa vigente.</p>
+      <p class="tagline"><span></span> BOTÓN DE ARREPENTIMIENTO</p>
+      <h3 class="arr-titulo">Solicitar la revocación de tu compra</h3>
+      <p class="arr-desc">Tenés 10 días corridos desde que recibiste el producto para arrepentirte, sin dar motivos y sin costo. No necesitás registrarte. Dentro de las 24 horas te enviaremos un <strong>código de identificación</strong> de tu solicitud.</p>
 
-      <div class="input-group" style="margin-bottom: 12px;">
-        <label>N° DE PEDIDO O DNI DE COMPRA</label>
+      <div class="input-group arr-campo">
+        <label for="arrNombre">NOMBRE Y APELLIDO</label>
+        <input type="text" id="arrNombre" placeholder="Ej: Juan Pérez" autocomplete="name">
+      </div>
+      <div class="input-group arr-campo">
+        <label for="arrPedido">N° DE PEDIDO O DNI DE COMPRA</label>
         <input type="text" id="arrPedido" placeholder="Ej: Pedido #1234 / DNI">
       </div>
-      <div class="input-group" style="margin-bottom: 20px;">
-        <label>TELÉFONO O EMAIL</label>
-        <input type="text" id="arrContacto" placeholder="Ej: 351 1234567">
+      <div class="input-group arr-campo">
+        <label for="arrProducto">PRODUCTO Y FECHA DE COMPRA</label>
+        <input type="text" id="arrProducto" placeholder="Ej: Mate Imperial Bronce - 15/11">
+      </div>
+      <div class="input-group arr-campo arr-campo-ultimo">
+        <label for="arrContacto">TELÉFONO O EMAIL</label>
+        <input type="text" id="arrContacto" placeholder="Ej: 351 1234567" autocomplete="tel">
       </div>
 
-      <button type="button" class="btn-primary" style="width: 100%; text-align: center; border: none; cursor: pointer;" onclick="enviarArrepentimientoWsp()">
+      <button type="button" class="btn-primary btn-arr-enviar" onclick="enviarArrepentimientoWsp()">
         Enviar Solicitud de Arrepentimiento <span>→</span>
       </button>
+      <p class="arr-nota">Los gastos de devolución corren por cuenta de JB MATES. <a href="#revocacion" onclick="cerrarModalArrepentimiento()">Ver condiciones</a>.</p>
     </div>
   </div>
 
   <!-- SCRIPTS -->
   <script>
     window.addEventListener('DOMContentLoaded', () => {
-      const aceptoLegal = localStorage.getItem('jb_mates_terminos_aceptados');
+      let aceptoLegal = null;
+      try { aceptoLegal = localStorage.getItem('jb_mates_terminos_aceptados'); } catch (e) {}
       if (!aceptoLegal) {
         document.getElementById('modalTerminosGlobal').classList.add('mostrar');
       }
@@ -739,20 +872,35 @@
     });
 
     function aceptarTerminosGlobal() {
-      localStorage.setItem('jb_mates_terminos_aceptados', 'true');
+      try { localStorage.setItem('jb_mates_terminos_aceptados', 'true'); } catch (e) {}
       document.getElementById('modalTerminosGlobal').classList.remove('mostrar');
     }
 
-    function cerrarTerminosGlobal() {
-      localStorage.setItem('jb_mates_terminos_aceptados', 'true');
+    // Cierra el aviso para leer los términos SIN darlos por aceptados
+    // (vuelve a aparecer en la próxima visita hasta que se toque "Aceptar").
+    function cerrarTerminosTemporal() {
       document.getElementById('modalTerminosGlobal').classList.remove('mostrar');
+    }
+
+    // Abre automáticamente la sección legal a la que apunta un enlace (#privacidad, #revocacion)
+    function abrirSeccionLegal() {
+      const destino = document.getElementById(location.hash.slice(1));
+      if (destino && destino.tagName === 'DETAILS') destino.open = true;
+    }
+    window.addEventListener('hashchange', abrirSeccionLegal);
+    window.addEventListener('DOMContentLoaded', abrirSeccionLegal);
+
+    // Formatea montos al estilo argentino: 58000 -> 58.000
+    function formatearPrecio(valor) {
+      const numero = Number(String(valor).split('.').join(''));
+      return isNaN(numero) ? valor : numero.toLocaleString('es-AR');
     }
 
     function abrirModalDetalle(nombreProd, urlVideo, tituloLargo, piezasStr, pvpReg, precioFin, ahorro) {
       document.getElementById('detTitulo').innerText = tituloLargo;
-      document.getElementById('detPvpRegular').innerText = `$${pvpReg}`;
-      document.getElementById('detPrecioFinal').innerText = `$${precioFin}`;
-      document.getElementById('detAhorroMonto').innerText = `$${ahorro}`;
+      document.getElementById('detPvpRegular').innerText = `$${formatearPrecio(pvpReg)}`;
+      document.getElementById('detPrecioFinal').innerText = `$${formatearPrecio(precioFin)}`;
+      document.getElementById('detAhorroMonto').innerText = `$${formatearPrecio(ahorro)}`;
 
       // Generar lista de piezas
       const listaContainer = document.getElementById('detListaPiezas');
@@ -802,18 +950,33 @@
     }
 
     function enviarArrepentimientoWsp() {
+      const nombre = document.getElementById('arrNombre').value.trim();
       const pedido = document.getElementById('arrPedido').value.trim();
+      const producto = document.getElementById('arrProducto').value.trim();
       const contacto = document.getElementById('arrContacto').value.trim();
 
-      if (!pedido || !contacto) {
-        alert("Por favor completa el número de pedido/DNI y tu contacto.");
+      if (!nombre || !pedido || !contacto) {
+        alert("Por favor completá tu nombre, el número de pedido/DNI y tu contacto.");
         return;
       }
 
-      const mensaje = encodeURIComponent(`Hola JB MATES, solicito formalmente el arrepentimiento/cancelación de mi compra.\n\nDatos:\n- Pedido/DNI: ${pedido}\n- Contacto: ${contacto}`);
+      const mensaje = encodeURIComponent(`Hola JB MATES, en ejercicio del derecho de arrepentimiento (art. 34 Ley 24.240) solicito formalmente la revocación de mi compra.\n\nDatos:\n- Nombre: ${nombre}\n- Pedido/DNI: ${pedido}\n- Producto y fecha: ${producto || 'No indicado'}\n- Contacto: ${contacto}\n\nQuedo a la espera del código de identificación de mi solicitud.`);
       window.open(`https://wa.me/5493547639421?text=${mensaje}`, '_blank');
       cerrarModalArrepentimiento();
     }
+
+    // Cerrar modales con la tecla Escape o haciendo clic fuera de la caja
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      if (document.getElementById('modalDetalle').classList.contains('active')) cerrarModalDetalle();
+      if (document.getElementById('modalArrepentimiento').classList.contains('active')) cerrarModalArrepentimiento();
+    });
+    document.getElementById('modalDetalle').addEventListener('click', (e) => {
+      if (e.target.id === 'modalDetalle') cerrarModalDetalle();
+    });
+    document.getElementById('modalArrepentimiento').addEventListener('click', (e) => {
+      if (e.target.id === 'modalArrepentimiento') cerrarModalArrepentimiento();
+    });
 
     function enviarCancionWsp() {
       const cancion = document.getElementById('inputCancion').value.trim();
