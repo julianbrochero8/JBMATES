@@ -151,6 +151,7 @@
   .precio-lista { text-align: right; font-variant-numeric: tabular-nums; }
   .precio-lista strong { display: block; font-size: 15px; }
   .precio-lista span { font-size: 11px; color: var(--muted); }
+  .row-cant { display: grid; grid-template-columns: 1fr 96px; gap: 10px; align-items: end; }
   .total-linea { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0 0; font-size: 14px; }
   .total-linea strong { font-variant-numeric: tabular-nums; }
 
@@ -174,11 +175,16 @@
     <section>
       <h2>Cargar compra</h2>
       <form id="formCompra" autocomplete="off">
-        <label>Producto
-          <input id="cNombre" type="text" placeholder="Ej: Torpedo alpaca" required>
-        </label>
+        <div class="row-cant">
+          <label>Producto
+            <input id="cNombre" type="text" placeholder="Ej: Torpedo alpaca" required>
+          </label>
+          <label>Cantidad
+            <input id="cCantidad" type="number" inputmode="numeric" min="1" step="1" value="1">
+          </label>
+        </div>
         <div class="row">
-          <label>Me salió ($)
+          <label>Me salió c/u ($)
             <input id="cCosto" type="number" inputmode="decimal" min="0" step="any" placeholder="0">
           </label>
           <label>Margen que quiero (%)
@@ -350,6 +356,7 @@
   // ---------- Compras ----------
   const CLAVE_C = 'jbmates-compras';
   // Precio de venta para lograr el margen (sobre costo): costo 100 con 80% → 180
+  const cant = (c) => c.cantidad || 1;
   const precioPara = (costo, m) => (costo > 0 && m >= 0 ? costo * (1 + m / 100) : null);
 
   function leerCompras() {
@@ -360,8 +367,8 @@
     try { localStorage.setItem(CLAVE_C, JSON.stringify(compras)); } catch (e) {}
   }
   let compras = leerCompras() ?? [
-    { id: 1, nombre: 'Torpedo alpaca cincelada', costo: 15000, margen: 80, fecha: Date.now() - 86400000 * 2, ejemplo: true },
-    { id: 2, nombre: 'Bombilla pico de loro', costo: 4000, margen: 100, fecha: Date.now() - 86400000, ejemplo: true },
+    { id: 1, nombre: 'Torpedo alpaca cincelada', costo: 15000, cantidad: 3, margen: 80, fecha: Date.now() - 86400000 * 2, ejemplo: true },
+    { id: 2, nombre: 'Bombilla pico de loro', costo: 4000, cantidad: 10, margen: 100, fecha: Date.now() - 86400000, ejemplo: true },
   ];
 
   function pintarCompras() {
@@ -375,9 +382,9 @@
       li.innerHTML = `
         <div class="info">
           <div class="nombre"></div>
-          <div class="detalle">${fecha.format(c.fecha)} · Me salió ${plata.format(c.costo)}</div>
+          <div class="detalle">${fecha.format(c.fecha)} · ${cant(c)} u. × ${plata.format(c.costo)} = ${plata.format(cant(c) * c.costo)}</div>
         </div>
-        <div class="precio-lista"><strong>${plata.format(precioPara(c.costo, c.margen))}</strong><span>vender a · ${Math.round(c.margen)}%</span></div>
+        <div class="precio-lista"><strong>${plata.format(precioPara(c.costo, c.margen))}</strong><span>vender c/u · ${Math.round(c.margen)}%</span></div>
         <button class="borrar" type="button" aria-label="Borrar">×</button>`;
       li.querySelector('.nombre').textContent = c.nombre;
       li.querySelector('.borrar').onclick = () => {
@@ -386,7 +393,7 @@
       };
       lista.appendChild(li);
     });
-    $('totInvertido').textContent = plata.format(compras.reduce((s, c) => s + c.costo, 0));
+    $('totInvertido').textContent = plata.format(compras.reduce((s, c) => s + cant(c) * c.costo, 0));
     $('avisoEjemploC').hidden = !compras.some((c) => c.ejemplo);
   }
 
@@ -404,17 +411,18 @@
     const nombre = $('cNombre').value.trim();
     const costo = parseFloat($('cCosto').value);
     const m = parseFloat($('cMargen').value);
+    const cantidad = parseInt($('cCantidad').value, 10);
     const err = $('cError');
-    if (!nombre || !(costo > 0) || !(m >= 0)) {
-      err.textContent = 'Completá el producto, cuánto te salió y el margen que querés.';
+    if (!nombre || !(cantidad >= 1) || !(costo > 0) || !(m >= 0)) {
+      err.textContent = 'Completá el producto, la cantidad, cuánto te salió cada uno y el margen que querés.';
       err.hidden = false;
       return;
     }
     err.hidden = true;
     compras = compras.filter((c) => !c.ejemplo);
-    compras.push({ id: Date.now(), nombre, costo, margen: m, fecha: Date.now() });
+    compras.push({ id: Date.now(), nombre, costo, cantidad, margen: m, fecha: Date.now() });
     guardarCompras(); pintarCompras();
-    $('cNombre').value = ''; $('cCosto').value = '';
+    $('cNombre').value = ''; $('cCosto').value = ''; $('cCantidad').value = '1';
     actualizarSugerido();
     $('cNombre').focus();
   });
