@@ -127,9 +127,36 @@
   .ejemplo { font-size: 12px; color: var(--muted); margin: 8px 0 0; }
   .ejemplo button { font: inherit; background: none; border: 0; padding: 0; color: var(--ink); text-decoration: underline; cursor: pointer; }
 
+  .tabs { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--ink); border-radius: 8px; overflow: hidden; }
+  .tabs button {
+    font: inherit; font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    padding: 10px; border: 0; background: var(--card); color: var(--ink); cursor: pointer;
+  }
+  .tabs button[aria-selected="true"] { background: var(--ink); color: var(--paper); }
+  .vista { display: grid; gap: 28px; }
+
+  .sugerido {
+    min-width: 110px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 17px;
+    font-variant-numeric: tabular-nums;
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .sugerido small { display: block; font-size: 10px; font-weight: 500; letter-spacing: .06em; opacity: .8; }
+  .sugerido.vacio-s { background: none; color: var(--muted); border: 1px dashed var(--line); }
+  .precio-lista { text-align: right; font-variant-numeric: tabular-nums; }
+  .precio-lista strong { display: block; font-size: 15px; }
+  .precio-lista span { font-size: 11px; color: var(--muted); }
+  .total-linea { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0 0; font-size: 14px; }
+  .total-linea strong { font-variant-numeric: tabular-nums; }
+
   @media (max-width: 420px) {
     .row { grid-template-columns: 1fr 1fr; }
-    .margen { grid-column: 1 / -1; }
+    .margen, .sugerido { grid-column: 1 / -1; }
   }
 </style>
 
@@ -138,6 +165,41 @@
     <img src="logo.jpg" alt="JB MATES, Tradición y Cultura">
   </header>
 
+  <div class="tabs" role="tablist">
+    <button type="button" role="tab" id="tabVentas" aria-selected="true">Ventas</button>
+    <button type="button" role="tab" id="tabCompras" aria-selected="false">Compras</button>
+  </div>
+
+  <div class="vista" id="vistaCompras" hidden>
+    <section>
+      <h2>Cargar compra</h2>
+      <form id="formCompra" autocomplete="off">
+        <label>Producto
+          <input id="cNombre" type="text" placeholder="Ej: Torpedo alpaca" required>
+        </label>
+        <div class="row">
+          <label>Me salió ($)
+            <input id="cCosto" type="number" inputmode="decimal" min="0" step="any" placeholder="0">
+          </label>
+          <label>Margen que quiero (%)
+            <input id="cMargen" type="number" inputmode="decimal" min="0" step="any" value="80">
+          </label>
+          <div class="sugerido vacio-s" id="sugeridoVivo" aria-live="polite">–<small>VENDELO A</small></div>
+        </div>
+        <p class="error" id="cError" hidden></p>
+        <button class="guardar" type="submit">Guardar compra</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Mis compras</h2>
+      <ul id="listaCompras"></ul>
+      <div class="total-linea"><span>Total invertido</span><strong id="totInvertido">$0</strong></div>
+      <p class="ejemplo" id="avisoEjemploC" hidden>Estos son ejemplos para que veas cómo queda. <button type="button" id="borrarEjemplosC">Borrarlos</button></p>
+    </section>
+  </div>
+
+  <div class="vista" id="vistaVentas">
   <section>
     <h2>Cargar venta</h2>
     <form id="form" autocomplete="off">
@@ -172,6 +234,7 @@
     <ul id="lista"></ul>
     <p class="ejemplo" id="avisoEjemplo" hidden>Estos son ejemplos para que veas cómo queda. <button type="button" id="borrarEjemplos">Borrarlos</button></p>
   </section>
+  </div>
 </div>
 
 <script>
@@ -273,5 +336,90 @@
 
   $('borrarEjemplos').onclick = () => { ventas = ventas.filter((v) => !v.ejemplo); guardar(); pintar(); };
 
+  // ---------- Pestañas ----------
+  function mostrar(cual) {
+    const esVentas = cual === 'ventas';
+    $('vistaVentas').hidden = !esVentas;
+    $('vistaCompras').hidden = esVentas;
+    $('tabVentas').setAttribute('aria-selected', esVentas);
+    $('tabCompras').setAttribute('aria-selected', !esVentas);
+  }
+  $('tabVentas').onclick = () => mostrar('ventas');
+  $('tabCompras').onclick = () => mostrar('compras');
+
+  // ---------- Compras ----------
+  const CLAVE_C = 'jbmates-compras';
+  // Precio de venta para lograr el margen (sobre costo): costo 100 con 80% → 180
+  const precioPara = (costo, m) => (costo > 0 && m >= 0 ? costo * (1 + m / 100) : null);
+
+  function leerCompras() {
+    try { const raw = localStorage.getItem(CLAVE_C); if (raw) return JSON.parse(raw); } catch (e) {}
+    return null;
+  }
+  function guardarCompras() {
+    try { localStorage.setItem(CLAVE_C, JSON.stringify(compras)); } catch (e) {}
+  }
+  let compras = leerCompras() ?? [
+    { id: 1, nombre: 'Torpedo alpaca cincelada', costo: 15000, margen: 80, fecha: Date.now() - 86400000 * 2, ejemplo: true },
+    { id: 2, nombre: 'Bombilla pico de loro', costo: 4000, margen: 100, fecha: Date.now() - 86400000, ejemplo: true },
+  ];
+
+  function pintarCompras() {
+    const lista = $('listaCompras');
+    lista.innerHTML = '';
+    if (!compras.length) {
+      lista.innerHTML = '<li class="vacio">Todavía no cargaste compras. Completá el formulario de arriba.</li>';
+    }
+    [...compras].sort((a, b) => b.fecha - a.fecha).forEach((c) => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <div class="info">
+          <div class="nombre"></div>
+          <div class="detalle">${fecha.format(c.fecha)} · Me salió ${plata.format(c.costo)}</div>
+        </div>
+        <div class="precio-lista"><strong>${plata.format(precioPara(c.costo, c.margen))}</strong><span>vender a · ${Math.round(c.margen)}%</span></div>
+        <button class="borrar" type="button" aria-label="Borrar">×</button>`;
+      li.querySelector('.nombre').textContent = c.nombre;
+      li.querySelector('.borrar').onclick = () => {
+        compras = compras.filter((x) => x.id !== c.id);
+        guardarCompras(); pintarCompras();
+      };
+      lista.appendChild(li);
+    });
+    $('totInvertido').textContent = plata.format(compras.reduce((s, c) => s + c.costo, 0));
+    $('avisoEjemploC').hidden = !compras.some((c) => c.ejemplo);
+  }
+
+  function actualizarSugerido() {
+    const p = precioPara(parseFloat($('cCosto').value), parseFloat($('cMargen').value));
+    const caja = $('sugeridoVivo');
+    caja.className = 'sugerido' + (p === null ? ' vacio-s' : '');
+    caja.innerHTML = (p === null ? '–' : plata.format(p)) + '<small>VENDELO A</small>';
+  }
+  $('cCosto').addEventListener('input', actualizarSugerido);
+  $('cMargen').addEventListener('input', actualizarSugerido);
+
+  $('formCompra').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const nombre = $('cNombre').value.trim();
+    const costo = parseFloat($('cCosto').value);
+    const m = parseFloat($('cMargen').value);
+    const err = $('cError');
+    if (!nombre || !(costo > 0) || !(m >= 0)) {
+      err.textContent = 'Completá el producto, cuánto te salió y el margen que querés.';
+      err.hidden = false;
+      return;
+    }
+    err.hidden = true;
+    compras = compras.filter((c) => !c.ejemplo);
+    compras.push({ id: Date.now(), nombre, costo, margen: m, fecha: Date.now() });
+    guardarCompras(); pintarCompras();
+    $('cNombre').value = ''; $('cCosto').value = '';
+    actualizarSugerido();
+    $('cNombre').focus();
+  });
+  $('borrarEjemplosC').onclick = () => { compras = compras.filter((c) => !c.ejemplo); guardarCompras(); pintarCompras(); };
+
   pintar();
+  pintarCompras();
 </script>
