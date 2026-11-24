@@ -1,0 +1,277 @@
+<title>JB Mates Control</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+<style>
+  /* Una sola columna angosta: logo, formulario, resumen, lista. Mismo papel y tinta que el logo. */
+  :root {
+    --paper: #f3f1ec;
+    --card: #fbfaf7;
+    --ink: #1b1a18;
+    --muted: #77736b;
+    --line: #dedad2;
+    --good: #2f7a4a;
+    --mid: #a7741c;
+    --bad: #b23a2e;
+    --font: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font);
+    font-size: 15px;
+  }
+  .wrap {
+    max-width: 560px;
+    margin: 0 auto;
+    padding-block: 24px 48px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    display: grid;
+    gap: 28px;
+  }
+  header { text-align: center; }
+  header img { width: 150px; max-width: 100%; mix-blend-mode: multiply; display: block; margin: 0 auto; }
+
+  h2 {
+    margin: 0 0 12px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  form { display: grid; gap: 12px; }
+  label { display: grid; gap: 4px; font-size: 13px; font-weight: 500; }
+  input {
+    font: inherit;
+    font-size: 16px;
+    padding: 11px 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--card);
+    color: var(--ink);
+    width: 100%;
+    min-width: 0;
+  }
+  input:focus { outline: 2px solid var(--ink); outline-offset: 1px; border-color: var(--ink); }
+  .row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: end; }
+  .margen {
+    min-width: 76px;
+    padding: 11px 10px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    border: 1px dashed var(--line);
+    color: var(--muted);
+  }
+  .margen small { display: block; font-size: 10px; font-weight: 500; letter-spacing: .06em; }
+  button.guardar {
+    font: inherit;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    font-size: 13px;
+    padding: 13px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--ink);
+    color: var(--paper);
+    cursor: pointer;
+  }
+  button.guardar:hover { opacity: .88; }
+  button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .error { color: var(--bad); font-size: 13px; margin: 0; }
+
+  .resumen { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .resumen div { background: var(--card); padding: 12px 10px; text-align: center; min-width: 0; }
+  .resumen span { display: block; font-size: 11px; color: var(--muted); letter-spacing: .04em; }
+  .resumen strong { font-size: 17px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+
+  ul { list-style: none; margin: 0; padding: 0; display: grid; }
+  li {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  li .info { min-width: 0; }
+  li .nombre { font-weight: 600; overflow-wrap: anywhere; }
+  li .detalle { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .pill {
+    font-weight: 700;
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+    padding: 4px 10px;
+    border-radius: 999px;
+    color: #fff;
+  }
+  .good { background: var(--good); color: #fff; border-color: var(--good); }
+  .mid  { background: var(--mid);  color: #fff; border-color: var(--mid); }
+  .bad  { background: var(--bad);  color: #fff; border-color: var(--bad); }
+  .margen.good, .margen.mid, .margen.bad { border-style: solid; }
+  .margen.good small, .margen.mid small, .margen.bad small { color: rgba(255,255,255,.85); }
+  .borrar {
+    border: 0; background: none; color: var(--muted); cursor: pointer;
+    font-size: 18px; line-height: 1; padding: 6px; border-radius: 6px;
+  }
+  .borrar:hover { color: var(--bad); }
+  .vacio { color: var(--muted); font-size: 14px; padding: 8px 0; }
+  .ejemplo { font-size: 12px; color: var(--muted); margin: 8px 0 0; }
+  .ejemplo button { font: inherit; background: none; border: 0; padding: 0; color: var(--ink); text-decoration: underline; cursor: pointer; }
+
+  @media (max-width: 420px) {
+    .row { grid-template-columns: 1fr 1fr; }
+    .margen { grid-column: 1 / -1; }
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <img src="logo.jpg" alt="JB MATES, Tradición y Cultura">
+  </header>
+
+  <section>
+    <h2>Cargar venta</h2>
+    <form id="form" autocomplete="off">
+      <label>Nombre del mate
+        <input id="nombre" type="text" placeholder="Ej: Imperial bronce" required>
+      </label>
+      <div class="row">
+        <label>Me salió ($)
+          <input id="costo" type="number" inputmode="decimal" min="0" step="any" placeholder="0">
+        </label>
+        <label>Lo vendí a ($)
+          <input id="precio" type="number" inputmode="decimal" min="0" step="any" placeholder="0">
+        </label>
+        <div class="margen" id="margenVivo" aria-live="polite">–<small>MARGEN</small></div>
+      </div>
+      <p class="error" id="error" hidden></p>
+      <button class="guardar" type="submit">Guardar</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>Resumen</h2>
+    <div class="resumen">
+      <div><span>Vendido</span><strong id="totVenta">$0</strong></div>
+      <div><span>Ganancia</span><strong id="totGanancia">$0</strong></div>
+      <div><span>Margen prom.</span><strong id="totMargen">–</strong></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Mis ventas</h2>
+    <ul id="lista"></ul>
+    <p class="ejemplo" id="avisoEjemplo" hidden>Estos son ejemplos para que veas cómo queda. <button type="button" id="borrarEjemplos">Borrarlos</button></p>
+  </section>
+</div>
+
+<script>
+  const CLAVE = 'jbmates-ventas';
+  const $ = (id) => document.getElementById(id);
+  const plata = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 });
+  const fecha = new Intl.DateTimeFormat('es-AR', { day: '2-digit', month: '2-digit' });
+
+  // Margen = ganancia sobre lo que te salió el mate (costo 100, venta 200 → 100%)
+  function margen(costo, precio) {
+    if (!(costo > 0) || !(precio >= 0)) return null;
+    return ((precio - costo) / costo) * 100;
+  }
+  function claseMargen(m) {
+    if (m === null) return '';
+    if (m >= 50) return 'good';
+    if (m >= 20) return 'mid';
+    return 'bad';
+  }
+  const pct = (m) => (m === null ? '–' : Math.round(m) + '%');
+
+  function leer() {
+    try {
+      const raw = localStorage.getItem(CLAVE);
+      if (raw) return JSON.parse(raw);
+    } catch (e) {}
+    return null;
+  }
+  function guardar() {
+    try { localStorage.setItem(CLAVE, JSON.stringify(ventas)); } catch (e) {}
+  }
+
+  const ejemplos = [
+    { id: 1, nombre: 'Imperial bronce', costo: 18000, precio: 32000, fecha: Date.now() - 86400000 * 3, ejemplo: true },
+    { id: 2, nombre: 'Torpedo algarrobo', costo: 9500, precio: 17000, fecha: Date.now() - 86400000 * 2, ejemplo: true },
+    { id: 3, nombre: 'Criollo', costo: 6000, precio: 7000, fecha: Date.now() - 86400000, ejemplo: true },
+  ];
+  let ventas = leer() ?? ejemplos;
+
+  function pintar() {
+    const lista = $('lista');
+    lista.innerHTML = '';
+    if (!ventas.length) {
+      lista.innerHTML = '<li class="vacio">Todavía no cargaste ventas. Completá el formulario de arriba.</li>';
+    }
+    [...ventas].sort((a, b) => b.fecha - a.fecha).forEach((v) => {
+      const m = margen(v.costo, v.precio);
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <div class="info">
+          <div class="nombre"></div>
+          <div class="detalle">${fecha.format(v.fecha)} · Costo ${plata.format(v.costo)} · Venta ${plata.format(v.precio)} · Ganancia ${plata.format(v.precio - v.costo)}</div>
+        </div>
+        <span class="pill ${claseMargen(m)}">${pct(m)}</span>
+        <button class="borrar" type="button" aria-label="Borrar">×</button>`;
+      li.querySelector('.nombre').textContent = v.nombre;
+      li.querySelector('.borrar').onclick = () => {
+        ventas = ventas.filter((x) => x.id !== v.id);
+        guardar(); pintar();
+      };
+      lista.appendChild(li);
+    });
+
+    const totVenta = ventas.reduce((s, v) => s + v.precio, 0);
+    const totCosto = ventas.reduce((s, v) => s + v.costo, 0);
+    $('totVenta').textContent = plata.format(totVenta);
+    $('totGanancia').textContent = plata.format(totVenta - totCosto);
+    $('totMargen').textContent = pct(margen(totCosto, totVenta));
+    $('avisoEjemplo').hidden = !ventas.some((v) => v.ejemplo);
+  }
+
+  function actualizarVivo() {
+    const m = margen(parseFloat($('costo').value), parseFloat($('precio').value));
+    const caja = $('margenVivo');
+    caja.className = 'margen ' + claseMargen(m);
+    caja.innerHTML = pct(m) + '<small>MARGEN</small>';
+  }
+  $('costo').addEventListener('input', actualizarVivo);
+  $('precio').addEventListener('input', actualizarVivo);
+
+  $('form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const nombre = $('nombre').value.trim();
+    const costo = parseFloat($('costo').value);
+    const precio = parseFloat($('precio').value);
+    const err = $('error');
+    if (!nombre || !(costo > 0) || !(precio >= 0) || isNaN(precio)) {
+      err.textContent = 'Completá el nombre, cuánto te salió y a cuánto lo vendiste.';
+      err.hidden = false;
+      return;
+    }
+    err.hidden = true;
+    ventas = ventas.filter((v) => !v.ejemplo);
+    ventas.push({ id: Date.now(), nombre, costo, precio, fecha: Date.now() });
+    guardar(); pintar();
+    e.target.reset(); actualizarVivo();
+    $('nombre').focus();
+  });
+
+  $('borrarEjemplos').onclick = () => { ventas = ventas.filter((v) => !v.ejemplo); guardar(); pintar(); };
+
+  pintar();
+</script>
